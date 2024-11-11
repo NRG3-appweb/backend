@@ -129,23 +129,6 @@ public class AppointmentsController(
     }
     
     
-    [HttpPut("{appointmentId:int}")]
-    [SwaggerOperation(
-        Summary = "Update an existing appointment",
-        Description = "Update an appointment by its id",
-        OperationId = "UpdateAppointmentById")]
-    [SwaggerResponse(StatusCodes.Status200OK, "The appointment was updated", typeof(AppointmentResource))]
-    [SwaggerResponse(StatusCodes.Status404NotFound, "The appointment was not found")]
-    public async Task<IActionResult> UpdateAppointment([FromRoute] int appointmentId, [FromBody] UpdateAppointmentResource resource)
-    {
-        var updateAppointmentCommand = UpdateAppointmentCommandResourceFromEntityAssembler.ToCommandFromResource(appointmentId, resource);
-        var appointment = await appointmentCommandService.Handle(updateAppointmentCommand);
-        if (appointment == null) return NotFound();
-
-        var appointmentResource = AppointmentResourceFromEntityAssembler.ToResourceFromEntity(appointment);
-        return Ok(appointmentResource);
-    }
-    
     
     
     
