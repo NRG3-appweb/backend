@@ -1,4 +1,5 @@
 ﻿using System.Net.Mime;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Commands;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Queries;
@@ -22,6 +23,8 @@ namespace NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest;
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [Tags("Appointments")]
+[EnableCors("AllowAllOrigins")]
+
 public class AppointmentsController(
     IAppointmentCommandService appointmentCommandService,
     IAppointmentQueryService appointmentQueryService
