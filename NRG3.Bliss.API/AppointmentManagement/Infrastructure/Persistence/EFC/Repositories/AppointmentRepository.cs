@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.CookiePolicy;
+﻿
 using Microsoft.EntityFrameworkCore;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Aggregates;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
@@ -15,23 +15,27 @@ namespace NRG3.Bliss.API.AppointmentManagement.Infrastructure.Persistence.EFC.Re
 /// </param>
 public class AppointmentRepository(AppDbContext context): BaseRepository<Appointment>(context), IAppointmentRepository
 {
+    /// <inheritdoc/>
     public async Task<IEnumerable<Appointment>> FindAppointmentsByUserIdAsync(int userId)=> 
         await Context.Set<Appointment>()
             .Include(a => a.User)
             .Include(a=>a.Service)
             .Where(a => a.UserId == userId).ToListAsync();
 
+    /// <inheritdoc/>
     public async Task<Appointment?> FindAppointmentByIdAsync(int appointmentId)
         => await Context.Set<Appointment>()
             .Include(a => a.User)
             .Include(a=>a.Service)
             .FirstOrDefaultAsync(a => a.Id == appointmentId);
 
+    /// <inheritdoc/>
     public async Task<bool> ExistsAppointmentByUserIdAndTimeAsync(int userId, DateTime reservationDate, DateTime reservationStartTime)
         => await Context.Set<Appointment>()
             .AnyAsync(a => a.UserId == userId && a.ReservationDate == reservationDate && a.ReservationStartTime == reservationStartTime);
     
 
+    /// <inheritdoc/>
     public async Task<bool> ExistsAppointmentByServiceIdAndTimeAsync(int serviceId, DateTime reservationDate, DateTime reservationStartTime)
         => await Context.Set<Appointment>()
             .AnyAsync(a => a.ServiceId == serviceId && a.ReservationDate == reservationDate && a.ReservationStartTime == reservationStartTime);

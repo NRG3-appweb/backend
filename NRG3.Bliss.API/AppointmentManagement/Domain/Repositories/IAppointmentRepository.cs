@@ -32,12 +32,42 @@ public interface IAppointmentRepository : IBaseRepository<Appointment>
     /// </returns>
     Task<Appointment?> FindAppointmentByIdAsync(int appointmentId);
     
+    /// <summary>
+    /// Check if an appointment exists for a user at a specific time
+    /// </summary>
+    /// <param name="userId">
+    /// The user id to search for
+    /// </param>
+    /// <param name="reservationDate">
+    /// The date of the reservation
+    /// </param>
+    /// <param name="reservationStartTime">
+    /// The start time of the reservation
+    /// </param>
+    /// <returns>
+    /// True if the appointment exists, otherwise false
+    /// </returns>
     Task<bool> ExistsAppointmentByUserIdAndTimeAsync(
         int userId, 
         DateTime reservationDate,
         DateTime reservationStartTime
         );
     
+    /// <summary>
+    /// Check if an appointment exists for a service at a specific time
+    /// </summary>
+    /// <param name="serviceId">
+    /// The service id to search for
+    /// </param>
+    /// <param name="reservationDate">
+    /// The date of the reservation
+    /// </param>
+    /// <param name="reservationStartTime">
+    /// The start time of the reservation
+    /// </param>
+    /// <returns>
+    /// True if the appointment exists, otherwise false
+    /// </returns>
     Task<bool> ExistsAppointmentByServiceIdAndTimeAsync(
         int serviceId, 
         DateTime reservationDate,

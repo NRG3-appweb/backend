@@ -9,7 +9,21 @@ using NRG3.Bliss.API.Shared.Domain.Repositories;
 
 namespace NRG3.Bliss.API.AppointmentManagement.Application.Internal.CommandServices;
 
-
+/// <summary>
+/// This class is responsible for handling the commands related to the appointment entity.
+/// </summary>
+/// <param name="appointmentRepository">
+///  The repository that provides the necessary methods to interact with the database.
+/// </param>
+/// <param name="unitOfWork">
+///  The unit of work that provides the necessary methods to interact with the database.
+/// </param>
+/// <param name="serviceContextFacade">
+/// The facade that provides the necessary methods to interact with the service context.
+/// </param>
+/// <param name="iamContextFacade">
+/// The facade that provides the necessary methods to interact with the iam context.
+/// </param>
 public class AppointmentCommandService(
     IAppointmentRepository appointmentRepository,
     IUnitOfWork unitOfWork,
@@ -19,6 +33,7 @@ public class AppointmentCommandService(
     : IAppointmentCommandService
 {
     
+    /// <inheritdoc />
     public async Task<Appointment?> Handle(CreateAppointmentCommand command)
     {
         

@@ -31,6 +31,12 @@ public partial class Appointment
         
     }
 
+    /// <summary>
+    /// Constructor for the appointment aggregate root
+    /// </summary>
+    /// <param name="command">
+    /// The <see cref="CreateAppointmentCommand"/> to create an appointment
+    /// </param>
     public Appointment(CreateAppointmentCommand command)
     {
         UserId = command.UserId;

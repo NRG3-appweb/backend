@@ -13,7 +13,4 @@
 /// <param name="LastName">
 /// The last name of the user
 /// </param>
-/// <param name="Dni">
-/// The dni of the user
-/// </param>
 public record SimplifiedUserResource( int Id, string FirstName, string LastName);
