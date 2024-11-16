@@ -100,7 +100,7 @@ public class AppointmentsController(
     [SwaggerResponse(StatusCodes.Status400BadRequest, "The appointment was not created")]
     public async Task<IActionResult> CreateAppointment([FromBody] CreateAppointmentResource resource)
     {
-        var createAppointmentCommand = CreateAppointmentCommandResourceFromEntityAssembler.ToCommandFromResource(resource);
+        var createAppointmentCommand = CreateAppointmentCommandFromResourceAssembler.ToCommandFromResource(resource);
         var appointment = await appointmentCommandService.Handle(createAppointmentCommand);
         if (appointment is null) return NotFound();
         var appointmentResource = AppointmentResourceFromEntityAssembler.ToResourceFromEntity(appointment);
