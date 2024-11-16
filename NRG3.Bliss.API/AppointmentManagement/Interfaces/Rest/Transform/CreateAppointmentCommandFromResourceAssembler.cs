@@ -6,7 +6,7 @@ namespace NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Transform;
 /// <summary>
 /// Assembler to create a CreateAppointmentCommand from a CreateAppointmentResource
 /// </summary>
-public static class CreateAppointmentCommandResourceFromEntityAssembler
+public static class CreateAppointmentCommandFromResourceAssembler
 {
     /// <summary>
     /// Assembles a CreateAppointmentCommand from a CreateAppointmentResource
@@ -21,12 +21,9 @@ public static class CreateAppointmentCommandResourceFromEntityAssembler
     {
         return new CreateAppointmentCommand(
             resource.userId,
-            resource.companyId,
             resource.serviceId,
             resource.reservationDate,
-            resource.status,
-            resource.date,
-            resource.time,
+            resource.reservationStartTime,
             resource.requirements
             );
     }
