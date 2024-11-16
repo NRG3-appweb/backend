@@ -1,9 +1,10 @@
-﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+﻿
 using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregate;
 using NRG3.Bliss.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using NRG3.Bliss.API.Shared.Infrastructure.Persistence.EFC.Repositories;
 
-namespace NRG3.Bliss.API.AppointmentManagement.Infrastructure.Persistence.EFC.Repositories;
+namespace NRG3.Bliss.API.IAM.Infrastructure.Persistence.EFC.Repositories;
 
 /// <summary>
 /// Repository for the User entity
