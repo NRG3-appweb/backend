@@ -14,7 +14,7 @@ namespace NRG3.Bliss.API.AppointmentManagement.Application.Internal.QueryService
 public class AppointmentQueryService(IAppointmentRepository appointmentRepository) : IAppointmentQueryService
 {
     /// <inheritdoc />
-    public async Task<IEnumerable<Appointment>> Handle(GetAllAppointmentsByUserIdQuery query)
+    public async Task<IEnumerable<Appointment>> Handle(GetAppointmentsByUserIdQuery query)
     {
         return await appointmentRepository.FindAppointmentsByUserIdAsync(query.UserId);
     }
