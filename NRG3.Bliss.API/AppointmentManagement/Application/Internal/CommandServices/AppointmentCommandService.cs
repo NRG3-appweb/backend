@@ -2,67 +2,64 @@
 using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Commands;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Services;
+using NRG3.Bliss.API.IAM.Interfaces.ACL;
 using NRG3.Bliss.API.ServiceManagement.Domain.Repositories;
+using NRG3.Bliss.API.ServiceManagement.Interfaces.ACL;
 using NRG3.Bliss.API.Shared.Domain.Repositories;
 
 namespace NRG3.Bliss.API.AppointmentManagement.Application.Internal.CommandServices;
 
-/// <summary>
-/// Appointment command service
-/// </summary>
-/// <param name="appointmentRepository">
-/// Appointment repository
-/// </param>
-/// <param name="userRepository">
-/// User repository
-/// </param>
-/// <param name="serviceRepository">
-/// Service repository
-/// </param>
-/// <param name="companyRepository">
-/// Company repository
-/// </param>
-/// <param name="unitOfWork">
-/// Unit of work
-/// </param>
+
 public class AppointmentCommandService(
     IAppointmentRepository appointmentRepository,
-    IUserRepository userRepository,
-    IServiceRepository serviceRepository,
-    ICompanyRepository companyRepository,
-    IUnitOfWork unitOfWork)
+    IUnitOfWork unitOfWork,
+    IServiceContextFacade serviceContextFacade,
+    IIAMContextFacade iamContextFacade
+    )
     : IAppointmentCommandService
 {
-    /// <inheritdoc />
+    
     public async Task<Appointment?> Handle(CreateAppointmentCommand command)
     {
         
-        var existingAppointment = await appointmentRepository.FindByServiceIdAndTimeAsync(command.ServiceId, command.ReservationDate, command.ReservationStartTime);
-        if (existingAppointment != null)
+        //An appointment for this service at the specified time already exists.
+        if (await appointmentRepository.ExistsAppointmentByUserIdAndTimeAsync(
+                command.UserId,
+                command.ReservationDate,
+                command.ReservationStartTime))
         {
-            throw new InvalidOperationException("An appointment for this service at the specified time already exists.");
+            throw new Exception("An appointment for this service at the specified time already exists.");
         }
         
-        var userAppointment = await appointmentRepository.FindByUserIdAndTimeAsync(command.UserId, command.ReservationDate, command.ReservationStartTime);
-        if (userAppointment != null)
+        //The user already has an appointment at the specified time.
+        if (await appointmentRepository.ExistsAppointmentByServiceIdAndTimeAsync(
+                command.ServiceId,
+                command.ReservationDate,
+                command.ReservationStartTime))
         {
-            throw new InvalidOperationException("The user already has an appointment at the specified time.");
+            throw new Exception("The user already has an appointment at the specified time.");
         }
-        
+
         var appointment = new Appointment(command);
+
+        try
+        {
+            await appointmentRepository.AddAsync(appointment);
+            await unitOfWork.CompleteAsync();
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"An error occurred while creating the appointment: {e.Message}");
+        }
         
-        await appointmentRepository.AddAsync(appointment);
-        await unitOfWork.CompleteAsync();
         
-        var user = await userRepository.FindByIdAsync(command.UserId);
-        var service = await serviceRepository.FindByIdAsync(command.ServiceId);
-        var company = await companyRepository.FindByIdAsync(command.CompanyId);
+        var service = await serviceContextFacade.FetchServiceByIdAsync(command.ServiceId);
+        var user = await iamContextFacade.FetchUserByIdAsync(command.UserId);
         
-        if (service != null) appointment.ServiceId = service.Id;
-        if (company != null) appointment.CompanyId = company.Id;
-        if (user != null) appointment.UserId = user.Id;
+        appointment.Service = service;
+        appointment.User = user;
         
-        return appointment; 
+        return appointment;
     }
 
     /// <inheritdoc />
@@ -80,26 +77,5 @@ public class AppointmentCommandService(
     }
     
     
-    /// <inheritdoc />
-    public async Task<Appointment?> Handle(UpdateAppointmentCommand command)
-    {
-        var appointment = await appointmentRepository.FindByIdAsync(command.AppointmentId);
-        if (appointment == null)
-        {
-            return null; 
-        }
-        
-        //TODO: Create a constructor to update this appointment (Gianluca)
-        appointment.UserId = command.UserId;
-        appointment.CompanyId = command.CompanyId;
-        appointment.ServiceId = command.ServiceId;
-        appointment.Status = command.Status;
-        appointment.ReservationDate = command.ReservationDate;
-        appointment.ReservationStartTime = command.ReservationStartTime;
-        appointment.Requirements = command.Requirements;
-        
-        await unitOfWork.CompleteAsync();
-
-        return appointment;
-    }
+    
 }
