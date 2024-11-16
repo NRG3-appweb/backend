@@ -1,7 +1,6 @@
-﻿namespace NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Resources;
+﻿namespace NRG3.Bliss.API.Shared.Interfaces.Rest.Resources;
 
-//TODO: move this resource and related assemblers to the shared context (Astonitas)
-//TODO: remove DNI
+
 /// <summary>
 /// Simplified Resource for a user
 /// </summary>
@@ -17,4 +16,4 @@
 /// <param name="Dni">
 /// The dni of the user
 /// </param>
-public record SimplifiedUserResource( int Id, string FirstName, string LastName, string Dni);
+public record SimplifiedUserResource( int Id, string FirstName, string LastName);
