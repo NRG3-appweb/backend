@@ -1,6 +1,7 @@
 ﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Aggregates;
 using NRG3.Bliss.API.ReviewManagement.Interfaces.Rest.Resources;
 using NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Transform;
+using NRG3.Bliss.API.Shared.Interfaces.REST.Transform;
 
 namespace NRG3.Bliss.API.ReviewManagement.Interfaces.Rest.Transform;
 
@@ -19,11 +20,11 @@ public static class SimplifiedReviewAppointmentFromEntityAssembler
             throw new ArgumentException("Company cannot be null", nameof(appointment.Company));
         }
 
-        var simplifiedServiceResource = SimplifiedAppointmentServiceResourceFromEntityAssembler.ToResourceFromEntity(appointment.Service);
+        var simplifiedServiceResource = SimplifiedServiceResourceFromEntityAssembler.ToResourceFromEntity(appointment.Service);
         var simplifiedCompanyResource = SimplifiedCompanyAppointmentFromEntityAssembler.ToResourceFromEntity(appointment.Company);
 
         return new SimplifiedAppointmentResource(
-            simplifiedServiceResource.ServiceName,
+            simplifiedServiceResource.serviceName,
             simplifiedCompanyResource.Name,
             appointment.ReservationStartTime,
             appointment.UserId

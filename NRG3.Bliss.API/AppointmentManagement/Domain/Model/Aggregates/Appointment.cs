@@ -3,6 +3,7 @@ using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Commands;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Model.ValueObjects;
 using NRG3.Bliss.API.IAM.Domain.Model.Aggregate;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Aggregates;
+using NRG3.Bliss.API.ServiceManagement.Domain.Model.Entities;
 
 namespace NRG3.Bliss.API.AppointmentManagement.Domain.Model.Aggregates;
 
@@ -21,6 +22,8 @@ public partial class Appointment
     public User User { get; internal set; }
     public int ServiceId { get; set; }
     public Service Service { get; internal set; }
+    public int CompanyId { get; internal set; }
+    public Company Company { get; internal set; }
     public EAppointmentStatus AppointmentStatus { get; set; }
     public DateTime ReservationDate { get; set; }
     public DateTime ReservationStartTime { get; set; }
