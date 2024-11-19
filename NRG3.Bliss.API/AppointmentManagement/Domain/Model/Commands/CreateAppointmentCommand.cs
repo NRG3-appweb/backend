@@ -1,22 +1,13 @@
 ﻿namespace NRG3.Bliss.API.AppointmentManagement.Domain.Model.Commands;
 
 /// <summary>
-/// Create appointment command
+/// Command to create a new appointment
 /// </summary>
 /// <param name="UserId">
-/// The user id to create the appointment for
-/// </param>
-/// <param name="CompanyId">
-/// The company id to create the appointment for
+/// The user id of the user who is creating the appointment
 /// </param>
 /// <param name="ServiceId">
-/// The service id to create the appointment for
-/// </param>
-/// <param name="ReservedAt">
-/// The date and time the appointment was reserved
-/// </param>
-/// <param name="Status">
-/// The status of the appointment
+/// The service id of the service that the user is booking
 /// </param>
 /// <param name="ReservationDate">
 /// The date of the appointment
@@ -25,6 +16,12 @@
 /// The start time of the appointment
 /// </param>
 /// <param name="Requirements">
-/// The requirements for the appointment
+/// Any requirements that the user has for the appointment
 /// </param>
-public record CreateAppointmentCommand( int UserId, int CompanyId, int ServiceId,DateTime ReservedAt, string Status, DateTime ReservationDate, string ReservationStartTime, string Requirements);
+public record CreateAppointmentCommand(
+    int UserId,
+    int ServiceId,
+    DateTime ReservationDate,
+    DateTime ReservationStartTime,
+    string Requirements
+    );

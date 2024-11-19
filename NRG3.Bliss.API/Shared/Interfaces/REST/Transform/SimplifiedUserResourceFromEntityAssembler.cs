@@ -1,15 +1,13 @@
-﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
-using NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Resources;
-
-namespace NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Transform;
+﻿
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregate;
+using NRG3.Bliss.API.Shared.Interfaces.Rest.Resources;
 
 
 /// <summary>
 /// Assembler to create a SimplifiedUserResource from a User entity
 /// </summary>
 
-//TODO: Correct assembler naming (Astonitas)
-public static class SimplifiedAppointmentUserResourceFromEntityAssembler
+public static class SimplifiedUserResourceFromEntityAssembler
 {
     
     /// <summary>
@@ -23,6 +21,6 @@ public static class SimplifiedAppointmentUserResourceFromEntityAssembler
     /// </returns>
     public static SimplifiedUserResource ToResourceFromEntity(User entity)
     {
-        return new SimplifiedUserResource(entity.Id, entity.FirstName, entity.LastName, entity.Dni);
+        return new SimplifiedUserResource(entity.Id, entity.FirstName, entity.LastName);
     }
 }

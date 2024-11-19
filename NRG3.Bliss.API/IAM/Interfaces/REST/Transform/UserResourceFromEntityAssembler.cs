@@ -1,7 +1,8 @@
-﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
-using NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Resources;
+﻿
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregate;
+using NRG3.Bliss.API.IAM.Interfaces.Rest.Resources;
 
-namespace NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Transform;
+namespace NRG3.Bliss.API.IAM.Interfaces.Rest.Transform;
 
 /// <summary>
 /// Assembler class to transform User to UserResource

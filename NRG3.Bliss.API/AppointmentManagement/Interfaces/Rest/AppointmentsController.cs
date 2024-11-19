@@ -56,7 +56,8 @@ public class AppointmentsController(
         return Ok(appointmentResource);
     }
     
-    //TODO: Refactor function and controller location in order to match the following endpoint (api/v1/users/{userId:int}/appointments) (Astonitas)
+    /*
+     * //TODO: Verify if correct (Alex)
     /// <summary>
     /// Get appointments by user id
     /// </summary>
@@ -82,6 +83,7 @@ public class AppointmentsController(
             );
         return Ok(appointmentResources);
     }
+     */
     
     /// <summary>
     /// Create a new appointment
@@ -101,7 +103,7 @@ public class AppointmentsController(
     [SwaggerResponse(StatusCodes.Status400BadRequest, "The appointment was not created")]
     public async Task<IActionResult> CreateAppointment([FromBody] CreateAppointmentResource resource)
     {
-        var createAppointmentCommand = CreateAppointmentCommandResourceFromEntityAssembler.ToCommandFromResource(resource);
+        var createAppointmentCommand = CreateAppointmentCommandFromResourceAssembler.ToCommandFromResource(resource);
         var appointment = await appointmentCommandService.Handle(createAppointmentCommand);
         if (appointment is null) return NotFound();
         var appointmentResource = AppointmentResourceFromEntityAssembler.ToResourceFromEntity(appointment);
@@ -130,9 +132,5 @@ public class AppointmentsController(
         await appointmentCommandService.Handle(deleteAppointmentCommand);
         return Ok("The appointment given id successfully deleted");
     }
-    
-    
-    
-    
-    
+
 }

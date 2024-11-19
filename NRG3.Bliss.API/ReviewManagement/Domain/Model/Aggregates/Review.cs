@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Aggregates;
-using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregate;
 using NRG3.Bliss.API.ReviewManagement.Domain.Model.Commands;
 namespace NRG3.Bliss.API.ReviewManagement.Domain.Model.Aggregates;
 

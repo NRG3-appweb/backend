@@ -1,19 +1,28 @@
 using Microsoft.EntityFrameworkCore;
+using NRG3.Bliss.API.AppointmentManagement.Application.ACL.Services;
 using NRG3.Bliss.API.AppointmentManagement.Application.Internal.CommandServices;
 using NRG3.Bliss.API.AppointmentManagement.Application.Internal.QueryServices;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Services;
 using NRG3.Bliss.API.AppointmentManagement.Infrastructure.Persistence.EFC.Repositories;
+using NRG3.Bliss.API.AppointmentManagement.Interfaces.ACL;
+using NRG3.Bliss.API.IAM.Application.Internal.QueryServices;
+using NRG3.Bliss.API.IAM.Domain.Repositories;
+using NRG3.Bliss.API.IAM.Domain.Services;
+using NRG3.Bliss.API.IAM.Infrastructure.Persistence.EFC.Repositories;
+using NRG3.Bliss.API.IAM.Interfaces.ACL;
 using NRG3.Bliss.API.ReviewManagement.Application.Internal.CommandServices;
 using NRG3.Bliss.API.ReviewManagement.Application.Internal.QueryServices;
 using NRG3.Bliss.API.ReviewManagement.Domain.Repositories;
 using NRG3.Bliss.API.ReviewManagement.Domain.Services;
 using NRG3.Bliss.API.ReviewManagement.Infrastructure.Persistence.EFC.Repositories;
+using NRG3.Bliss.API.ServiceManagement.Application.ACL;
 using NRG3.Bliss.API.ServiceManagement.Application.Internal.CommandServices;
 using NRG3.Bliss.API.ServiceManagement.Application.Internal.QueryServices;
 using NRG3.Bliss.API.ServiceManagement.Domain.Repositories;
 using NRG3.Bliss.API.ServiceManagement.Domain.Services;
 using NRG3.Bliss.API.ServiceManagement.Infrastructure.Persistence.EFC.Repositories;
+using NRG3.Bliss.API.ServiceManagement.Interfaces.ACL;
 using NRG3.Bliss.API.Shared.Domain.Repositories;
 using NRG3.Bliss.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using NRG3.Bliss.API.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -76,6 +85,8 @@ builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IServiceCommandService, ServiceCommandService>();
 builder.Services.AddScoped<IServiceQueryService, ServiceQueryService>();
+builder.Services.AddScoped<IServiceContextFacade, ServiceContextFacade>(); //new
+
 builder.Services.AddScoped<ICategoryCommandService, CategoryCommandService>();
 builder.Services.AddScoped<ICategoryQueryService, CategoryQueryService>();
 builder.Services.AddScoped<ICompanyCommandService, CompanyCommandService>();
@@ -83,7 +94,13 @@ builder.Services.AddScoped<ICompanyQueryService, CompanyQueryService>();
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IAppointmentCommandService, AppointmentCommandService>();
 builder.Services.AddScoped<IAppointmentQueryService, AppointmentQueryService>();
+builder.Services.AddScoped<IAppointmentContextFacade, AppointmentContextFacade>();
+
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+builder.Services.AddScoped<IIAMContextFacade, IIAMContextFacade>();
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
 // Review Management Bounded Context Dependency Injection Configuration
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();

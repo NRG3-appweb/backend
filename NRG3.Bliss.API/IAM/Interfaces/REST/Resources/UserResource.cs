@@ -1,4 +1,4 @@
-﻿namespace NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Resources;
+﻿namespace NRG3.Bliss.API.IAM.Interfaces.Rest.Resources;
 
 /// <summary>
 /// Resource for a user

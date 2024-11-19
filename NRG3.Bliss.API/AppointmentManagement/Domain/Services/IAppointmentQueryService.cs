@@ -12,12 +12,12 @@ public interface IAppointmentQueryService
     /// Handle get all appointments by user id query
     /// </summary>
     /// <param name="query">
-    /// The <see cref="GetAllAppointmentsByUserIdQuery"/> query
+    /// The <see cref="GetAppointmentsByUserIdQuery"/> query
     /// </param>
     /// <returns>
     /// The <see cref="IEnumerable{Appointment}"/> object with the appointments
     /// </returns>
-    Task<IEnumerable<Appointment>> Handle(GetAllAppointmentsByUserIdQuery query);
+    Task<IEnumerable<Appointment>> Handle(GetAppointmentsByUserIdQuery query);
     
     /// <summary>
     /// Handle get appointment by id query

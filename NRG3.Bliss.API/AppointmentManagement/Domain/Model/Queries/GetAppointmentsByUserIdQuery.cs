@@ -6,4 +6,4 @@
 /// <param name="UserId">
 /// The user id to get appointments for
 /// </param>
-public record GetAllAppointmentsByUserIdQuery(int UserId);
+public record GetAppointmentsByUserIdQuery(int UserId);

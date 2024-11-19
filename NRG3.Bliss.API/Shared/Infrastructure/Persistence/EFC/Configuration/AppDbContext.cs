@@ -1,7 +1,7 @@
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Aggregates;
-using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregate;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Aggregates;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Entities;
 using NRG3.Bliss.API.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
@@ -23,7 +23,6 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        //TODO: Add database configuration modeling here
         
         builder.Entity<Service>().HasKey(s => s.Id);
         builder.Entity<Service>().Property(s => s.Id).IsRequired().ValueGeneratedOnAdd();
@@ -42,13 +41,12 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Company>().Property(c => c.Name).IsRequired().HasMaxLength(100);
         builder.Entity<Company>().Property(c => c.Ruc).HasMaxLength(11);
 
+        
         builder.Entity<Appointment>().HasKey(a => a.Id);
         builder.Entity<Appointment>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Appointment>().Property(a => a.UserId).IsRequired();
-        builder.Entity<Appointment>().Property(a => a.CompanyId).IsRequired();
         builder.Entity<Appointment>().Property(a => a.ServiceId).IsRequired();
-        builder.Entity<Appointment>().Property(a => a.RegisterAt).IsRequired();
-        builder.Entity<Appointment>().Property(a => a.Status).IsRequired().HasMaxLength(50);
+        builder.Entity<Appointment>().Property(a => a.AppointmentStatus).IsRequired();
         builder.Entity<Appointment>().Property(a => a.ReservationDate).IsRequired();
         builder.Entity<Appointment>().Property(a => a.ReservationStartTime).IsRequired();
         builder.Entity<Appointment>().Property(a => a.Requirements).IsRequired();
@@ -79,11 +77,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .HasForeignKey(s => s.CompanyId)
             .HasPrincipalKey(c => c.Id);
         
-        builder.Entity<Company>()
-            .HasMany(c => c.Appointments)
-            .WithOne(a => a.Company)
-            .HasForeignKey(a => a.CompanyId)
-            .HasPrincipalKey(c => c.Id);
+        
         
         builder.Entity<Service>()
             .HasMany(s => s.Appointments)

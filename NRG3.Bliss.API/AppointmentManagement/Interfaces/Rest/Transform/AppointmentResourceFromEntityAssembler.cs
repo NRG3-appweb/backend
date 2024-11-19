@@ -1,6 +1,5 @@
 ﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Aggregates;
 using NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Resources;
-using NRG3.Bliss.API.ServiceManagement.Interfaces.REST.Transform;
 using NRG3.Bliss.API.Shared.Interfaces.REST.Transform;
 
 namespace NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Transform;
@@ -24,11 +23,9 @@ public static class AppointmentResourceFromEntityAssembler
     {
         return new AppointmentResource(
             entity.Id,
-            SimplifiedAppointmentUserResourceFromEntityAssembler.ToResourceFromEntity(entity.User), 
-            SimplifiedAppointmentServiceResourceFromEntityAssembler.ToResourceFromEntity(entity.Service),
-            SimplifiedCompanyResourceFromEntityAssembler.ToResourceFromEntity(entity.Company),
-            entity.CreatedDate,
-            entity.Status,
+            SimplifiedUserResourceFromEntityAssembler.ToResourceFromEntity(entity.User), 
+            SimplifiedServiceResourceFromEntityAssembler.ToResourceFromEntity(entity.Service),
+            entity.AppointmentStatus.ToString(),
             entity.ReservationDate,
             entity.ReservationStartTime,
             entity.Requirements
