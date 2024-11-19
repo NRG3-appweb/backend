@@ -1,6 +1,4 @@
 ﻿
-using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
-using NRG3.Bliss.API.AppointmentManagement.Interfaces.ACL;
 using NRG3.Bliss.API.IAM.Domain.Model.Aggregate;
 using NRG3.Bliss.API.IAM.Domain.Model.Queries;
 using NRG3.Bliss.API.IAM.Domain.Repositories;
@@ -9,8 +7,7 @@ using NRG3.Bliss.API.IAM.Domain.Services;
 namespace NRG3.Bliss.API.IAM.Application.Internal.QueryServices;
 
 public class UserQueryService(
-    IUserRepository userRepository,
-    IAppointmentContextFacade appointmentContextFacade
+    IUserRepository userRepository
     ) : IUserQueryService
 {
     public async Task<User?> Handle(GetUserByIdQuery query)

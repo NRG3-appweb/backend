@@ -6,6 +6,7 @@ using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Services;
 using NRG3.Bliss.API.AppointmentManagement.Infrastructure.Persistence.EFC.Repositories;
 using NRG3.Bliss.API.AppointmentManagement.Interfaces.ACL;
+using NRG3.Bliss.API.IAM.Application.ACL;
 using NRG3.Bliss.API.IAM.Application.Internal.QueryServices;
 using NRG3.Bliss.API.IAM.Domain.Repositories;
 using NRG3.Bliss.API.IAM.Domain.Services;
@@ -86,7 +87,7 @@ builder.Services.AddScoped<IAppointmentQueryService, AppointmentQueryService>();
 builder.Services.AddScoped<IAppointmentContextFacade, AppointmentContextFacade>();
 
 builder.Services.AddScoped<IUserQueryService, UserQueryService>();
-builder.Services.AddScoped<IIAMContextFacade, IIAMContextFacade>();
+builder.Services.AddScoped<IIAMContextFacade, IAMContextFacade>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
