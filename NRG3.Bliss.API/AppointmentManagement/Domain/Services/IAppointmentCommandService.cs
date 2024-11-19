@@ -30,8 +30,4 @@ public interface IAppointmentCommandService
     /// </returns>
     Task Handle(DeleteAppointmentCommand command);
     
-    
-    
-    
-    
 }
