@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Queries;
 using NRG3.Bliss.API.ServiceManagement.Domain.Services;
@@ -12,6 +13,8 @@ namespace NRG3.Bliss.API.ServiceManagement.Interfaces.REST;
 [Route("api/v1/companies/{companyId}/services")]
 [Produces(MediaTypeNames.Application.Json)]
 [Tags("Services")]
+[EnableCors("AllowAllOrigins")]
+
 public class CompanyServicesController(IServiceQueryService serviceQueryService) : ControllerBase
 {
     [HttpGet]
