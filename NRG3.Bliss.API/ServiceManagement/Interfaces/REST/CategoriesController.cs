@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Queries;
@@ -13,6 +14,8 @@ namespace NRG3.Bliss.API.ServiceManagement.Interfaces.REST;
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [Tags("Categories")]
+[EnableCors("AllowAllOrigins")]
+
 public class CategoriesController(
     ICategoryCommandService categoryCommandService,
     ICategoryQueryService categoryQueryService

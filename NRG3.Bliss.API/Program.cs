@@ -25,6 +25,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Apply Route Naming Convention
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.WithOrigins("*")
+                .WithMethods("POST", "GET", "PUT", "DELETE")
+                .AllowAnyHeader();
+        });
+});
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers(options => options.Conventions.Add(new KebabCaseRouteNamingConvention()));
 
@@ -50,30 +65,24 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => options.EnableAnnotations());
 
-//Dependency Injection Configuration
+// Dependency Injection Configuration
 
-//Shared Bounded Context Dependency Injection Configuration
+// Shared Bounded Context Dependency Injection Configuration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Service Management Bounded Context Dependency Injection Configuration
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
-
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IServiceCommandService, ServiceCommandService>();
 builder.Services.AddScoped<IServiceQueryService, ServiceQueryService>();
-
 builder.Services.AddScoped<ICategoryCommandService, CategoryCommandService>();
 builder.Services.AddScoped<ICategoryQueryService, CategoryQueryService>();
-
 builder.Services.AddScoped<ICompanyCommandService, CompanyCommandService>();
 builder.Services.AddScoped<ICompanyQueryService, CompanyQueryService>();
-
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IAppointmentCommandService, AppointmentCommandService>();
 builder.Services.AddScoped<IAppointmentQueryService, AppointmentQueryService>();
-
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Review Management Bounded Context Dependency Injection Configuration
@@ -92,13 +101,19 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
+}
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+// Use CORS
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 
