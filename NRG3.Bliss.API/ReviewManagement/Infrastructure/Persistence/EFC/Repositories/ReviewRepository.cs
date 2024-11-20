@@ -47,5 +47,15 @@ public class ReviewRepository(AppDbContext context) : BaseRepository<Review>(con
     public async Task<bool> ReviewExistForAppointmentId(int appointmentId) =>
         await Context.Set<Review>().AnyAsync(r => r.AppointmentId == appointmentId);
     
+    public async Task<IEnumerable<Review>> FindAllReviewsAsync()
+    {
+        return await Context.Reviews
+            .Include(r => r.User)
+            .Include(r => r.Appointment)
+            .ThenInclude(a => a.Service)
+            .Include(r => r.Appointment)
+            .ThenInclude(a => a.Company)
+            .ToListAsync();
+    }
 
 }

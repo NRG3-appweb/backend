@@ -48,4 +48,6 @@ public interface IReviewQueryService
         Handle(GetReviewByAppointmentIdQuery query);
     
     Task<Appointment?> GetAppointmentByIdAsync(int appointmentId);  
+    
+    Task<IEnumerable<Review>> GetAllReviewsAsync();
 }

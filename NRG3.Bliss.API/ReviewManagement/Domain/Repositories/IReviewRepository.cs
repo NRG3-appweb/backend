@@ -58,4 +58,6 @@ public interface IReviewRepository : IBaseRepository<Review>
     
     Task<Review?> FindReviewByAppointmentIdAsync(int appointmentId);
     
+    Task<IEnumerable<Review>> FindAllReviewsAsync();
+    
 }
