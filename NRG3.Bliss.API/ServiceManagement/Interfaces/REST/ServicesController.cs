@@ -63,7 +63,7 @@ public class ServicesController(
     {
         var createServiceCommand = CreateServiceCommandResourceFromEntityAssembler.ToCommandFromResource(resource);
         var service = await serviceCommandService.Handle(createServiceCommand);
-        if (service is null) return BadRequest();
+        if (service is null) return BadRequest("The service could not be created");
         var serviceResource = ServiceResourceFromEntityAssembler.ToResourceFromEntity(service);
         return CreatedAtAction(nameof(GetServiceById), new { serviceId = service.Id }, serviceResource);
     }
