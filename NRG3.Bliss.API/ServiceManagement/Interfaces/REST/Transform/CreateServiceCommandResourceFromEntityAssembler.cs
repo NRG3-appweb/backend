@@ -7,6 +7,6 @@ public static class CreateServiceCommandResourceFromEntityAssembler
 {
     public static CreateServiceCommand ToCommandFromResource(CreateServiceResource resource)
     {
-        return new CreateServiceCommand(resource.CompanyId, resource.CategoryId, resource.ServiceName, resource.Description, resource.Price, resource.Duration);
+        return new CreateServiceCommand(resource.CompanyId, resource.CategoryId, resource.Name, resource.Description, resource.Price, resource.Duration, resource.ImageUrl);
     }
 }

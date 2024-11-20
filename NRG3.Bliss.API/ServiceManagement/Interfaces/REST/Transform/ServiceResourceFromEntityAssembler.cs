@@ -12,10 +12,11 @@ public static class ServiceResourceFromEntityAssembler
             entity.Id, 
             SimplifiedCompanyResourceFromEntityAssembler.ToResourceFromEntity(entity.Company), 
             ServiceCategoryResourceFromEntityAssembler.ToResourceFromEntity(entity.Category),
-            entity.ServiceName,
+            entity.Name,
             entity.Description,
             entity.Price,
-            entity.Duration
+            entity.Duration,
+            entity.ImageUrl
         );
     }
 }
