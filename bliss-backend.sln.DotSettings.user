@@ -9,13 +9,20 @@
     &lt;TestId&gt;xUnit::EB620997-A354-4598-A584-DF48D41D4153::net8.0::NRG3.Bliss.API.Tests.CompanyCommandServiceTests.Handle_ShouldThrowException_WhenCompanyNameExists&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9257b56d_002Dd1df_002D4db2_002D9185_002D4ce77e11cd9f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Handle_ShouldThrowException_WhenCompanyNameExists #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9257b56d_002Dd1df_002D4db2_002D9185_002D4ce77e11cd9f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Handle_ShouldThrowException_WhenCompanyNameExists #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::EB620997-A354-4598-A584-DF48D41D4153::net8.0::NRG3.Bliss.API.Tests.CompanyCommandServiceTests.Handle_ShouldThrowException_WhenCompanyNameExists&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::EB620997-A354-4598-A584-DF48D41D4153::net8.0::NRG3.Bliss.API.Tests.CompanyCommandServiceTests.Handle_ShouldCreateCompany_WhenCompanyNameDoesNotExist&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::EB620997-A354-4598-A584-DF48D41D4153::net8.0::NRG3.Bliss.API.Tests.AppointmentManagement.AppointmentCommandServiceTests.Handle_CreateAppointmentCommand_ShouldCreateAppointment&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::EB620997-A354-4598-A584-DF48D41D4153::net8.0::NRG3.Bliss.API.Tests.AppointmentManagement.AppointmentCommandServiceTests.Handle_CreateAppointmentCommand_ShouldCreateAppointmentWhenNoConflicts&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::EB620997-A354-4598-A584-DF48D41D4153::net8.0::NRG3.Bliss.API.Tests.AppointmentManagement.AppointmentCommandServiceTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=aca36cc2_002D5496_002D4f9a_002D990b_002D63412f2c4892/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Handle_ShouldThrowException_WhenCompanyNameExists #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=aca36cc2_002D5496_002D4f9a_002D990b_002D63412f2c4892/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Handle_ShouldThrowException_WhenCompanyNameExists #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::EB620997-A354-4598-A584-DF48D41D4153::net8.0::NRG3.Bliss.API.Tests.CompanyCommandServiceTests.Handle_ShouldThrowException_WhenCompanyNameExists&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::EB620997-A354-4598-A584-DF48D41D4153::net8.0::NRG3.Bliss.API.Tests.ServiceTest.ServiceCommandServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::EB620997-A354-4598-A584-DF48D41D4153::net8.0::NRG3.Bliss.API.Tests.CompanyCommandServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::EB620997-A354-4598-A584-DF48D41D4153::net8.0::NRG3.Bliss.API.Tests.AppointmentManagement.AppointmentCommandServiceTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
