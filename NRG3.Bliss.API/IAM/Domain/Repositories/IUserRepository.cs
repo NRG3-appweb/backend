@@ -8,5 +8,5 @@ namespace NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
 /// </summary>
 public interface IUserRepository : IBaseRepository<User>
 {
-    
+    bool ExistsByEmail(string email);
 }

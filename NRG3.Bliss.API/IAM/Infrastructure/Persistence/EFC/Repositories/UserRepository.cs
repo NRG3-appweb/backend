@@ -13,5 +13,8 @@ namespace NRG3.Bliss.API.AppointmentManagement.Infrastructure.Persistence.EFC.Re
 /// </param>
 public class UserRepository(AppDbContext context): BaseRepository<User>(context), IUserRepository
 {
-    
+    public bool ExistsByEmail(string email)
+    {
+        return Context.Set<User>().Any(user => user.Email.Equals(email));
+    }
 }
