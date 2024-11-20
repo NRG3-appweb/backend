@@ -11,7 +11,6 @@ namespace NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
 /// It contains the properties and methods to manage the user information.
 /// </remarks>
 
-// TODO: Refactor class location to IAM context  (Astonitas)
 public partial class User
 {
     public int Id { get; private set; }
