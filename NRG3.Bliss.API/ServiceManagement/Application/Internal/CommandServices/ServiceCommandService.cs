@@ -20,7 +20,7 @@ public class ServiceCommandService(
         {
             throw new InvalidOperationException("The service name already exists for the company and category.");
         }
-        var service = new Service(command.CompanyId, command.CategoryId, command.ServiceName, command.Description, command.Price, command.Duration);
+        var service = new Service(command.CompanyId, command.CategoryId, command.ServiceName, command.Description, command.Price, command.Duration, command.ImageUrl);
         await serviceRepository.AddAsync(service);
         await unitOfWork.CompleteAsync();
         var category = await categoryRepository.FindByIdAsync(command.CategoryId);

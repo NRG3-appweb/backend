@@ -9,7 +9,7 @@ public class UpdateServiceCommandResourceFromEntityAssembler
     {
         return new UpdateServiceCommand(
             serviceId, resource.CategoryId, 
-            resource.ServiceName, resource.Description,
+            resource.Name, resource.Description,
             resource.Price, resource.Duration);
     }
 }

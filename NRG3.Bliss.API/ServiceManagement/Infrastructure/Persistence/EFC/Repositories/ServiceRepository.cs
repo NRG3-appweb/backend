@@ -32,6 +32,6 @@ public class ServiceRepository(AppDbContext context) : BaseRepository<Service>(c
     public async Task<bool> ServiceNameExistsForCompanyAndCategoryAsync(int companyId, int categoryId, string serviceName)
     {
         return await Context.Set<Service>()
-            .AnyAsync(s=> s.CompanyId == companyId && s.CategoryId == categoryId && s.ServiceName == serviceName);
+            .AnyAsync(s=> s.CompanyId == companyId && s.CategoryId == categoryId && s.Name == serviceName);
     }
 }

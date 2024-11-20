@@ -40,7 +40,8 @@ namespace NRG3.Bliss.API.Tests.ServiceTest
                 "DuplicateServiceName",
                 "DescriptionService",
                 100,
-                30
+                30,
+                "ImageUrl"
                 );
             // [When]: service data is passed with an existing name for the company and category.
             _serviceRepositoryMock.Setup(repo =>
@@ -58,7 +59,8 @@ namespace NRG3.Bliss.API.Tests.ServiceTest
                 "Unique Service",
                 "Description the service",
                 100,
-                30);
+                30,
+                "ImageUrl");
             var category = new Category { Id = 1,Name = "Category1"};
             var company = new Company { Id = 1,Name = "Company1"};
             _serviceRepositoryMock.Setup(repo =>
@@ -73,7 +75,7 @@ namespace NRG3.Bliss.API.Tests.ServiceTest
             Assert.NotNull(result);
             Assert.Equal(command.CompanyId,result.CompanyId);
             Assert.Equal(command.CategoryId,result.CategoryId);
-            Assert.Equal(command.ServiceName,result.ServiceName);
+            Assert.Equal(command.ServiceName,result.Name);
             Assert.Equal(command.Description,result.Description);
             Assert.Equal(command.Price,result.Price);
             Assert.Equal(command.Duration, result.Duration);
