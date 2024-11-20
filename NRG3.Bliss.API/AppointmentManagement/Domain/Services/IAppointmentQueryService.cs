@@ -38,6 +38,6 @@ public interface IAppointmentQueryService
     /// <returns>
     /// The <see cref="Appointment"/> object with the appointment
     /// </returns>
-    Task<Appointment?> Handle(GetAppointmentByCompanyId query);
+    Task<IEnumerable<Appointment>> Handle(GetAppointmentByCompanyId query);
     
 }

@@ -75,6 +75,6 @@ public interface IAppointmentRepository : IBaseRepository<Appointment>
     /// <returns>
     /// The <see cref="Appointment"/> if found, otherwise null
     /// </returns>
-    Task<Appointment?> FindByCompanyIdAsync(int companyId);
+    Task<IEnumerable<Appointment>> FindAppointmentsByCompanyIdAsync(int companyId);
     
 }

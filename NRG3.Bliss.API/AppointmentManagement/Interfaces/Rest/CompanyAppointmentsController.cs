@@ -27,9 +27,8 @@ public class CompanyAppointmentsController(IAppointmentQueryService appointmentQ
     public async Task<IActionResult> GetAppointmentByCompanyId([FromRoute] int companyId)
     {
         var getAppointmentByCompanyIdQuery = new GetAppointmentByCompanyId(companyId);
-        var appointment = await appointmentQueryService.Handle(getAppointmentByCompanyIdQuery);
-        if (appointment is null) return NotFound();
-        var appointmentResource = AppointmentResourceFromEntityAssembler.ToResourceFromEntity(appointment);
-        return Ok(appointmentResource);
+        var appointments = await appointmentQueryService.Handle(getAppointmentByCompanyIdQuery);
+        var appointmentResources = appointments.Select(AppointmentResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(appointmentResources);
     }
 }

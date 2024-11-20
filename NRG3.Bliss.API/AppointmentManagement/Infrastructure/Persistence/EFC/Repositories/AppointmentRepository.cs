@@ -46,7 +46,13 @@ public class AppointmentRepository(AppDbContext context): BaseRepository<Appoint
         .Include(a=>a.Service)
         .FirstOrDefaultAsync(a => a.Id == appointmentId);
 
-    
+    public async Task<IEnumerable<Appointment>> FindAppointmentsByCompanyIdAsync(int companyId) => 
+        await Context.Set<Appointment>()
+            .Include(a => a.User)
+            .Include(a => a.Company)
+            .Include(a=>a.Service)
+            .Where(a => a.CompanyId == companyId).ToListAsync();
+
     public async Task<Appointment?> FindByCompanyIdAsync(int companyId)
     {
         return await Context.Set<Appointment>()
