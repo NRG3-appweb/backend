@@ -45,4 +45,14 @@ public class AppointmentRepository(AppDbContext context): BaseRepository<Appoint
         .Include(a => a.Company)
         .Include(a=>a.Service)
         .FirstOrDefaultAsync(a => a.Id == appointmentId);
+
+    
+    public async Task<Appointment?> FindByCompanyIdAsync(int companyId)
+    {
+        return await Context.Set<Appointment>()
+            .Include(a => a.User)
+            .Include(a => a.Company)
+            .Include(a => a.Service)
+            .FirstOrDefaultAsync(c => c.CompanyId == companyId);
+    }
 }
