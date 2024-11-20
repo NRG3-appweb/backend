@@ -1,4 +1,5 @@
 ﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Aggregates;
+using NRG3.Bliss.API.IAM.Domain.Model.Commands;
 using NRG3.Bliss.API.ReviewManagement.Domain.Model.Aggregates;
 
 namespace NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
@@ -48,6 +49,19 @@ public partial class User
         Address = address;
         City = city;
         BirthDate = birthDate;
+    }
+    
+    public User(SignUpCommand command, string hashedPassword)
+    {
+        FirstName = command.FirstName;
+        LastName = command.LastName;
+        Password = hashedPassword;
+        Email = command.Email;
+        Phone = command.Phone;
+        Dni = command.Dni;
+        Address = command.Address;
+        City = command.City;
+        BirthDate = command.BirthDate;
     }
     
 }

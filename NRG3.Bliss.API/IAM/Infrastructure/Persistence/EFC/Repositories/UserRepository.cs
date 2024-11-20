@@ -1,4 +1,5 @@
-﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
 using NRG3.Bliss.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using NRG3.Bliss.API.Shared.Infrastructure.Persistence.EFC.Repositories;
@@ -16,5 +17,10 @@ public class UserRepository(AppDbContext context): BaseRepository<User>(context)
     public bool ExistsByEmail(string email)
     {
         return Context.Set<User>().Any(user => user.Email.Equals(email));
+    }
+
+    public async Task<User?> FindByEmailAsync(string email)
+    {
+        return await Context.Set<User>().FirstOrDefaultAsync(user => user.Email.Equals(email));
     }
 }
