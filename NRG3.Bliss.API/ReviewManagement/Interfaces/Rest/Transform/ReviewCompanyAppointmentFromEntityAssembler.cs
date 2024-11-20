@@ -5,7 +5,7 @@ using NRG3.Bliss.API.Shared.Interfaces.REST.Resources;
 
 namespace NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Transform;
 
-//TODO: Import resource from shared context (Elvia)
+
 /// <summary>
 /// Assembler to create a SimplifiedCompanyResource from a Company entity
 /// </summary>

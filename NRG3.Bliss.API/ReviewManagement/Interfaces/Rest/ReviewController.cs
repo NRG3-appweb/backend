@@ -52,6 +52,23 @@ public class ReviewsController(
         var reviewResources = reviews.Select(ReviewResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(reviewResources);
     }
+
+
+    [HttpGet("appointment/{appointmentId:int}")]
+    [SwaggerOperation(
+        Summary = "Get review by appointment id",
+        Description = "Get a review by the id the appointment has",
+        OperationId = "GetReviewByAppointmentIdQuery")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The review was found", typeof(ReviewResource))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "The review was not found.")]
+    public async Task<IActionResult> GetReviewByAppointmentId([FromRoute] int appointmentId)
+    {
+        var getReviewByAppointmentIdQuery = new GetReviewByAppointmentIdQuery(appointmentId);
+        var review = await reviewQueryService.Handle(getReviewByAppointmentIdQuery);
+        if (review is null) return NotFound();
+        var reviewResource = ReviewResourceFromEntityAssembler.ToResourceFromEntity(review);
+        return Ok(reviewResource);
+    }
     
 
     [HttpGet("company/{companyId:int}")]
