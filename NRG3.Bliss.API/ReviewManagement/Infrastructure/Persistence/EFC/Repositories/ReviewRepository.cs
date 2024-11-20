@@ -10,7 +10,7 @@ public class ReviewRepository(AppDbContext context) : BaseRepository<Review>(con
 {
     public async Task<IEnumerable<Review>> FindReviewsByUserIdAsync(int userId) =>
         await Context.Set<Review>()
-            .Include(r => r.UserR)
+            .Include(r => r.User)
             .Include(r => r.Appointment)
                 .ThenInclude(a => a.Service) // Ensure Service is included
             .Include(r => r.Appointment)
@@ -19,7 +19,7 @@ public class ReviewRepository(AppDbContext context) : BaseRepository<Review>(con
 
     public async Task<IEnumerable<Review>> FindReviewsByAppointmentIdAsync(int appointmentId) =>
         await Context.Set<Review>()
-            .Include(r => r.UserR)
+            .Include(r => r.User)
             .Include(r => r.Appointment)
                 .ThenInclude(a => a.Service) // Ensure Service is included
             .Include(r => r.Appointment)
@@ -28,7 +28,7 @@ public class ReviewRepository(AppDbContext context) : BaseRepository<Review>(con
 
     public async Task<IEnumerable<Review>> FindReviewsByCompanyIdAsync(int companyId) =>
         await Context.Set<Review>()
-            .Include(r => r.UserR)
+            .Include(r => r.User)
             .Include(r => r.Appointment)
                 .ThenInclude(a => a.Service) // Ensure Service is included
             .Include(r => r.Appointment)
@@ -37,10 +37,13 @@ public class ReviewRepository(AppDbContext context) : BaseRepository<Review>(con
 
     public async Task<Review?> FindReviewByIdAsync(int reviewId) =>
         await Context.Set<Review>()
-            .Include(r => r.UserR)
+            .Include(r => r.User)
             .Include(r => r.Appointment)
                 .ThenInclude(a => a.Service) // Ensure Service is included
             .Include(r => r.Appointment)
                 .ThenInclude(a => a.Company)
             .FirstOrDefaultAsync(r => r.Id == reviewId);
+
+    public async Task<bool> ReviewExistForAppointmentId(int appointmentId) =>
+        await Context.Set<Review>().AnyAsync(r => r.AppointmentId == appointmentId);
 }

@@ -41,11 +41,12 @@ public class ReviewCommandService(
         }
 
         // Check if the appointment already has a review
-        var existingReview = await reviewRepository.FindReviewsByAppointmentIdAsync(command.AppointmentId);
-        if (existingReview.Any())
+        
+        if (await reviewRepository.ReviewExistForAppointmentId(command.AppointmentId))
         {
             throw new InvalidOperationException("The appointment already has a review.");
         }
+
 
         var review = new Review(command);
         await reviewRepository.AddAsync(review);

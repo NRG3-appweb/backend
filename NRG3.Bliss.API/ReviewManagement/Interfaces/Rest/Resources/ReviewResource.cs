@@ -21,7 +21,7 @@
 public record ReviewResource(
     int Id,
     int UserId,
-    SimplifiedAppointmentResource Appointment,
+    ReviewAppointmentResource Appointment,
     int Rating,
     string Comments,
     string ImageUrl
