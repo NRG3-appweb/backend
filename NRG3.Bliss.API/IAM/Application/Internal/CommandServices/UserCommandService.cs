@@ -1,6 +1,7 @@
-﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+﻿
 using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
 using NRG3.Bliss.API.IAM.Application.Internal.OutboundServices;
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregates;
 using NRG3.Bliss.API.IAM.Domain.Model.Commands;
 using NRG3.Bliss.API.IAM.Domain.Services;
 using NRG3.Bliss.API.Shared.Domain.Repositories;

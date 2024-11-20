@@ -1,4 +1,7 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NRG3.Bliss.API.AppointmentManagement.Application.Internal.CommandServices;
 using NRG3.Bliss.API.AppointmentManagement.Application.Internal.QueryServices;
@@ -10,6 +13,7 @@ using NRG3.Bliss.API.IAM.Application.Internal.OutboundServices;
 using NRG3.Bliss.API.IAM.Application.Internal.QueryServices;
 using NRG3.Bliss.API.IAM.Domain.Services;
 using NRG3.Bliss.API.IAM.Infrastructure.Hashing.BCrypt.Services;
+using NRG3.Bliss.API.IAM.Infrastructure.Persistence.EFC.Repositories;
 using NRG3.Bliss.API.IAM.Infrastructure.Pipeline.Middleware.Extensions;
 using NRG3.Bliss.API.IAM.Infrastructure.Tokens.Configuration;
 using NRG3.Bliss.API.IAM.Infrastructure.Tokens.Services;
@@ -113,7 +117,29 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 
+// Add services to the container.
+builder.Services.AddControllers();
 
+// Configure JWT authentication
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
+
+// Add authorization
+builder.Services.AddAuthorization();
 
 
 

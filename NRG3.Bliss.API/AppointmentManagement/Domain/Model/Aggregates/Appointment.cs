@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices.JavaScript;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Commands;
-using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregates;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Aggregates;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Entities;
 

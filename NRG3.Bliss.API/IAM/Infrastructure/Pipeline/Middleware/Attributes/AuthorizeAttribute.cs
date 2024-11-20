@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregates;
+
 
 namespace NRG3.Bliss.API.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 

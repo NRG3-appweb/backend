@@ -3,8 +3,9 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+
 using NRG3.Bliss.API.IAM.Application.Internal.OutboundServices;
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregates;
 using NRG3.Bliss.API.IAM.Infrastructure.Tokens.Configuration;
 
 namespace NRG3.Bliss.API.IAM.Infrastructure.Tokens.Services;

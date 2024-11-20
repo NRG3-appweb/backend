@@ -2,7 +2,7 @@
 using NRG3.Bliss.API.IAM.Domain.Model.Commands;
 using NRG3.Bliss.API.ReviewManagement.Domain.Model.Aggregates;
 
-namespace NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+namespace NRG3.Bliss.API.IAM.Domain.Model.Aggregates;
 
 /// <summary>
 /// User aggregate root

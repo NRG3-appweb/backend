@@ -1,6 +1,6 @@
 ﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Aggregates;
-using NRG3.Bliss.API.ReviewManagement.Interfaces.Rest.Resources;
 using NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Transform;
+using NRG3.Bliss.API.ReviewManagement.Interfaces.Rest.Resources;
 
 namespace NRG3.Bliss.API.ReviewManagement.Interfaces.Rest.Transform;
 

@@ -1,11 +1,11 @@
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Aggregates;
-using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregates;
+using NRG3.Bliss.API.ReviewManagement.Domain.Model.Aggregates;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Aggregates;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Entities;
 using NRG3.Bliss.API.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
-using NRG3.Bliss.API.ReviewManagement.Domain.Model.Aggregates;
 namespace NRG3.Bliss.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
@@ -55,14 +55,14 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
 
         builder.Entity<User>().HasKey(u => u.Id);
         builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<User>().Property(u => u.FirstName).IsRequired().HasMaxLength(50);
-        builder.Entity<User>().Property(u => u.LastName).IsRequired().HasMaxLength(50);
-        builder.Entity<User>().Property(u => u.PasswordHash).IsRequired().HasMaxLength(50);
+        builder.Entity<User>().Property(u => u.FirstName).IsRequired();
+        builder.Entity<User>().Property(u => u.LastName).IsRequired();
+        builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
         builder.Entity<User>().Property(u => u.Email).IsRequired();
-        builder.Entity<User>().Property(u => u.Phone).IsRequired().HasMaxLength(9);
-        builder.Entity<User>().Property(u => u.Dni).IsRequired().HasMaxLength(8);
+        builder.Entity<User>().Property(u => u.Phone).IsRequired();
+        builder.Entity<User>().Property(u => u.Dni).IsRequired();
         builder.Entity<User>().Property(u => u.Address).IsRequired();
-        builder.Entity<User>().Property(u => u.City).IsRequired().HasMaxLength(100);
+        builder.Entity<User>().Property(u => u.City).IsRequired();
         builder.Entity<User>().Property(u => u.BirthDate).IsRequired();
         
         

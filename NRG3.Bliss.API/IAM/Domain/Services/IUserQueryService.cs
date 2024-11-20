@@ -1,4 +1,5 @@
-﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+﻿
+using NRG3.Bliss.API.IAM.Domain.Model.Aggregates;
 using NRG3.Bliss.API.IAM.Domain.Model.Queries;
 
 namespace NRG3.Bliss.API.IAM.Domain.Services;

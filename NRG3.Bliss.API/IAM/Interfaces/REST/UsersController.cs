@@ -62,6 +62,7 @@ public class UsersController(IUserQueryService userQueryService) : ControllerBas
     /// <returns>
     /// <see cref="IActionResult"/> with the <see cref="IEnumerable{UserResource}"/> users.
     /// </returns>
+    [AllowAnonymous]
     [HttpGet]
     [SwaggerOperation(
         Summary = "Get all users",

@@ -1,7 +1,7 @@
-﻿using NRG3.Bliss.API.ReviewManagement.Domain.Model.Aggregates;
+﻿using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
+using NRG3.Bliss.API.ReviewManagement.Domain.Model.Aggregates;
 using NRG3.Bliss.API.ReviewManagement.Domain.Model.Commands;
 using NRG3.Bliss.API.ReviewManagement.Domain.Repositories;
-using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
 using NRG3.Bliss.API.ReviewManagement.Domain.Services;
 using NRG3.Bliss.API.Shared.Domain.Repositories;
 
