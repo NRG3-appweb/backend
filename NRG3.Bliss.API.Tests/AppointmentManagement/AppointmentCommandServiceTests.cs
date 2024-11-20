@@ -1,5 +1,4 @@
-﻿
-using NRG3.Bliss.API.AppointmentManagement.Domain.Model.Entities;
+﻿using NRG3.Bliss.API.IAM.Domain.Model.Aggregates;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Aggregates;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Entities;
 using NRG3.Bliss.API.ServiceManagement.Domain.Repositories;
@@ -78,7 +77,7 @@ public class AppointmentCommandServiceTests
         
         mockServiceRepository
             .Setup(repo => repo.FindByIdAsync(command.ServiceId))
-            .ReturnsAsync(new Service(command.CompanyId, 1, "ServiceName", "Description", 100.0, 1.0));
+            .ReturnsAsync(new Service(command.CompanyId, 1, "ServiceName", "Description", 100.0, 1.0, "example.com"));
         
         mockCompanyRepository
             .Setup(repo => repo.FindByIdAsync(command.CompanyId))
