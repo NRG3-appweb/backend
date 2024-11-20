@@ -1,4 +1,4 @@
-﻿// SimplifiedCompanyAppointmentFromEntityAssembler.cs
+﻿// ReviewCompanyAppointmentFromEntityAssembler.cs
 using NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Resources;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Entities;
 using NRG3.Bliss.API.Shared.Interfaces.REST.Resources;
@@ -9,7 +9,7 @@ namespace NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest.Transform;
 /// <summary>
 /// Assembler to create a SimplifiedCompanyResource from a Company entity
 /// </summary>
-public static class SimplifiedCompanyAppointmentFromEntityAssembler
+public static class ReviewCompanyAppointmentFromEntityAssembler
 {
     /// <summary>
     /// Assembles a SimplifiedCompanyResource from a Company entity
