@@ -12,9 +12,6 @@
 /// <param name="LastName">
 /// The last name of the user
 /// </param>
-/// <param name="Password">
-/// The password of the user
-/// </param>
 /// <param name="Email">
 /// The email of the user
 /// </param>
@@ -37,7 +34,6 @@ public record UserResource(
     int Id,
     string FirstName,
     string LastName,
-    string Password,
     string Email,
     string Phone,
     string Dni,
