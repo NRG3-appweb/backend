@@ -27,4 +27,12 @@ public partial class Service
         Price = price;
         Duration = duration;
     }
+
+    public void UpdateInformation(string serviceName, string description, double price, double duration)
+    {
+        ServiceName = serviceName;
+        Description = description;
+        Price = price;
+        Duration = duration;
+    }
 }
