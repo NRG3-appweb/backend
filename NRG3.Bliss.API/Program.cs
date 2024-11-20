@@ -88,62 +88,12 @@ builder.Services.AddSwaggerGen(options =>
                 Url  = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
             }
         });
-    options.AddSecurityDefinition(
-        "Bearer",
-        new OpenApiSecurityScheme
-        {
-            In = ParameterLocation.Header,
-            Description = "Please enter token",
-            Name = "Authorization",
-            Type = SecuritySchemeType.Http,
-            BearerFormat = "JWT",
-            Scheme = "bearer"
-        });
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Id = "Bearer",
-                    Type = ReferenceType.SecurityScheme
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
     options.EnableAnnotations();
 });
 
 
 // Add services to the container.
 builder.Services.AddControllers();
-
-// Configure JWT authentication
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-        };
-    });
-
-// Add authorization
-builder.Services.AddAuthorization();
-
-
-
-
 
 // Dependency Injection Configuration
 
@@ -198,8 +148,6 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseCors("AllowAllPolicy");
-
-app.UseRequestAuthorization();
 
 app.UseHttpsRedirection();
 

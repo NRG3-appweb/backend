@@ -22,8 +22,6 @@ namespace NRG3.Bliss.API.ServiceManagement.Interfaces.REST;
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [Tags("Companies")]
-[EnableCors("AllowAllOrigins")]
-
 public class CompaniesController(
     ICompanyCommandService companyCommandService,
     ICompanyQueryService companyQueryService

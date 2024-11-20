@@ -15,8 +15,6 @@ namespace NRG3.Bliss.API.ReviewManagement.Interfaces.Rest;
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [Tags("Reviews")]
-[EnableCors("AllowAllOrigins")]
-
 public class ReviewsController(
     IReviewCommandService reviewCommandService,
     IReviewQueryService reviewQueryService

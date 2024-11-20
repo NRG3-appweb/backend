@@ -18,7 +18,7 @@ namespace NRG3.Bliss.API.IAM.Interfaces.REST;
 /// <param name="userQueryService">
 /// <see cref="IUserQueryService"/> User query service
 /// </param>
-[Authorize]
+
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]

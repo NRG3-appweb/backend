@@ -13,7 +13,6 @@ namespace NRG3.Bliss.API.AppointmentManagement.Interfaces.Rest;
 [Route("api/v1/companies/{companyId}/appointments")]
 [Produces(MediaTypeNames.Application.Json)]
 [Tags("Appointments")]
-[EnableCors("AllowAllOrigins")]
 public class CompanyAppointmentsController(IAppointmentQueryService appointmentQueryService) : ControllerBase
 {
     [HttpGet]
