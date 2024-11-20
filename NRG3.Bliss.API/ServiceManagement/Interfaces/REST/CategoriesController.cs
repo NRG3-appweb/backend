@@ -10,6 +10,15 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace NRG3.Bliss.API.ServiceManagement.Interfaces.REST;
 
+/**
+ * Controller for categories
+ * <param name="categoryCommandService">
+ * The <see cref="ICategoryCommandService"/> service to handle category commands
+ * </param>
+ * <param name="categoryQueryService">
+ * The <see cref="ICategoryQueryService"/> service to handle category queries
+ * </param>
+ */
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
@@ -21,6 +30,15 @@ public class CategoriesController(
     ICategoryQueryService categoryQueryService
     ) : ControllerBase
 {
+    /**
+     * Create a new category
+     * <param name="resource">
+     * The <see cref="CreateCategoryResource"/> resource to create the category from
+     * </param>
+     * <returns>
+     * The <see cref="CategoryResource"/> resource created
+     * </returns>
+     */
     [HttpPost]
     [SwaggerOperation(
         Summary = "Create a new category",
@@ -36,6 +54,15 @@ public class CategoriesController(
         return CreatedAtAction(nameof(GetCategoryById), new { categoryId = category.Id }, categoryResource);
     }
     
+    /**
+     * Get category by id
+     * <param name="categoryId">
+     * The id of the category to get
+     * </param>
+     * <returns>
+     * The <see cref="CategoryResource"/> resource with the given id
+     * </returns>
+     */
     [HttpGet("{categoryId:int}")]
     [SwaggerOperation(
         Summary = "Get category by id",
@@ -51,6 +78,12 @@ public class CategoriesController(
         return Ok(categoryResource);
     }
     
+    /**
+     * Get all categories
+     * <returns>
+     * The <see cref="CategoryResource"/> resources for all categories
+     * </returns>
+     */
     [HttpGet]
     [SwaggerOperation(
         Summary = "Get all categories",

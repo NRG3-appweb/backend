@@ -4,6 +4,13 @@ using NRG3.Bliss.API.ServiceManagement.Domain.Model.Commands;
 
 namespace NRG3.Bliss.API.ServiceManagement.Domain.Model.Entities;
 
+/**
+ * Company entity
+ * <summary>
+ * This class represents the company entity.
+ * It contains the properties and methods to manage the company information.
+ * </summary>
+ */
 public partial class Company
 {
     public int Id { get; set; }

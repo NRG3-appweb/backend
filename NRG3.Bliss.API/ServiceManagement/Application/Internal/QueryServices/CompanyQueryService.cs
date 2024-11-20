@@ -7,11 +7,13 @@ namespace NRG3.Bliss.API.ServiceManagement.Application.Internal.QueryServices;
 
 public class CompanyQueryService(ICompanyRepository companyRepository) : ICompanyQueryService
 {
+    /// <inheritdoc />
     public async Task<IEnumerable<Company>> Handle(GetAllCompaniesQuery query)
     {
         return await companyRepository.ListAsync();
     }
 
+    /// <inheritdoc />
     public async Task<Company?> Handle(GetCompanyByIdQuery query)
     {
         var company = await companyRepository.FindByIdAsync(query.CompanyId);

@@ -8,7 +8,7 @@ namespace NRG3.Bliss.API.ServiceManagement.Infrastructure.Persistence.EFC.Reposi
 
 public class CompanyRepository(AppDbContext context) : BaseRepository<Company>(context), ICompanyRepository
 {
-    
+    /// <inheritdoc />
     public async Task<IEnumerable<Company>> FindCompaniesByCompanyName(string name)=> 
         await Context.Set<Company>()
         .Where(c => c.Name == name)

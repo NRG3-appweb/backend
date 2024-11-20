@@ -7,16 +7,19 @@ namespace NRG3.Bliss.API.ServiceManagement.Application.Internal.QueryServices;
 
 public class ServiceQueryService(IServiceRepository serviceRepository) : IServiceQueryService
 {
+    /// <inheritdoc />
     public async Task<Service?> Handle(GetServiceByIdQuery query)
     {
         return await serviceRepository.FindServiceById(query.ServiceId);
     }
     
+    /// <inheritdoc />
     public async Task<IEnumerable<Service>> Handle(GetAllServicesQuery query)
     {
         return await serviceRepository.FindAllServices();
     }
     
+    /// <inheritdoc />
     public async Task<IEnumerable<Service>> Handle(GetAllServicesByCompanyIdQuery query)
     {
         if (query.CompanyId <= 0)
