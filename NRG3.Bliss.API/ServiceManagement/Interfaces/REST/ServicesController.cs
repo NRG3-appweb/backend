@@ -1,6 +1,7 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using NRG3.Bliss.API.ServiceManagement.Domain.Model.Commands;
 using NRG3.Bliss.API.ServiceManagement.Domain.Model.Queries;
 using NRG3.Bliss.API.ServiceManagement.Domain.Services;
 using NRG3.Bliss.API.ServiceManagement.Interfaces.REST.Resources;
@@ -65,5 +66,35 @@ public class ServicesController(
         if (service is null) return BadRequest();
         var serviceResource = ServiceResourceFromEntityAssembler.ToResourceFromEntity(service);
         return CreatedAtAction(nameof(GetServiceById), new { serviceId = service.Id }, serviceResource);
+    }
+    
+    [HttpPut("{serviceId:int}")]
+    [SwaggerOperation(
+        Summary = "Update a service",
+        Description = "Update a new service in the system",
+        OperationId = "UpdateService")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The service was updated", typeof(ServiceResource))]
+    [SwaggerResponse(StatusCodes.Status400BadRequest, "The request is invalid")]
+    public async Task<IActionResult> UpdateService([FromBody] UpdateServiceResource resource,[FromRoute] int serviceId)
+    {
+        var updateServiceCommand = UpdateServiceCommandResourceFromEntityAssembler.ToCommandFromResource(resource, serviceId);
+        var service = await serviceCommandService.Handle(updateServiceCommand);
+        if (service is null) return BadRequest();
+        var serviceResource = ServiceResourceFromEntityAssembler.ToResourceFromEntity(service);
+        return Ok(serviceResource);
+    }
+    
+    [HttpDelete("{serviceId:int}")]
+    [SwaggerOperation(
+        Summary = "Delete a service",
+        Description = "Delete a service in the system",
+        OperationId = "DeleteService")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The service was deleted")]
+    [SwaggerResponse(StatusCodes.Status400BadRequest, "The request is invalid")]
+    public async Task<IActionResult> DeleteServiceById([FromRoute] int serviceId)
+    {
+        var deleteServiceCommand = new DeleteServiceCommand(serviceId);
+        await serviceCommandService.Handle(deleteServiceCommand);
+        return Ok("The service with the given id was successfully deleted");
     }
 }
