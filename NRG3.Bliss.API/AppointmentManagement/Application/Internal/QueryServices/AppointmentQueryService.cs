@@ -24,4 +24,9 @@ public class AppointmentQueryService(IAppointmentRepository appointmentRepositor
     {
         return await appointmentRepository.FindAppointmentByIdAsync(query.AppointmentId);
     }
+
+    public async Task<IEnumerable<Appointment>> Handle(GetAppointmentByCompanyId query)
+    {
+        return await appointmentRepository.FindAppointmentsByCompanyIdAsync(query.CompanyId);
+    }
 }
