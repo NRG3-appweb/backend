@@ -5,7 +5,7 @@ namespace NRG3.Bliss.API.IAM.Interfaces.REST.Transform;
 
 public class UserResourceFromEntityAssembler
 {
-    public static UserResource toResourceFromEntity(User user)
+    public static UserResource ToResourceFromEntity(User user)
     {
         return new UserResource(
             user.Id,

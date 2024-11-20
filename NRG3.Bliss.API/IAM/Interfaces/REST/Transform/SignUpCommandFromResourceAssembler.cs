@@ -5,7 +5,7 @@ namespace NRG3.Bliss.API.IAM.Interfaces.REST.Transform;
 
 public class SignUpCommandFromResourceAssembler
 {
-    public SignUpCommand FromResource(SignUpResource resource)
+    public static SignUpCommand ToCommandFromResource(SignUpResource resource)
     {
         return new SignUpCommand(
             resource.FirstName,
