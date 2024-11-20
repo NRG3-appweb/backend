@@ -1,0 +1,8 @@
+﻿[build]
+builder = "dockerfile"
+dockerfilePath = "./NRG3.Bliss.API/Dockerfile"
+
+[deploy]
+startCommand = "./NRG3.Bliss.API"
+restartPolicyType = "always"
+healthcheckPath = "/health"
