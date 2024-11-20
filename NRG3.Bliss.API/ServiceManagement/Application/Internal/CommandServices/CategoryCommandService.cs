@@ -9,6 +9,7 @@ namespace NRG3.Bliss.API.ServiceManagement.Application.Internal.CommandServices;
 public class CategoryCommandService(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
 : ICategoryCommandService
 {
+    /// <inheritdoc />
     public async Task<Category?> Handle(CreateCategoryCommand command)
     {
         var category = new Category(command);

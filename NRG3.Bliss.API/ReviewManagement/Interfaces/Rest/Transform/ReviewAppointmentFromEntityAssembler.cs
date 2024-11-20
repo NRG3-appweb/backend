@@ -5,9 +5,9 @@ using NRG3.Bliss.API.ReviewManagement.Interfaces.Rest.Resources;
 namespace NRG3.Bliss.API.ReviewManagement.Interfaces.Rest.Transform;
 
 //TODO: Correct naming of the class to match resource name (Elvia)
-public static class SimplifiedReviewAppointmentFromEntityAssembler
+public static class ReviewAppointmentFromEntityAssembler
 {
-    public static SimplifiedAppointmentResource ToResourceFromEntity(Appointment appointment)
+    public static ReviewAppointmentResource ToResourceFromEntity(Appointment appointment)
     {
         if (appointment.Service == null)
         {
@@ -20,9 +20,9 @@ public static class SimplifiedReviewAppointmentFromEntityAssembler
         }
 
         var simplifiedServiceResource = SimplifiedAppointmentServiceResourceFromEntityAssembler.ToResourceFromEntity(appointment.Service);
-        var simplifiedCompanyResource = SimplifiedCompanyAppointmentFromEntityAssembler.ToResourceFromEntity(appointment.Company);
+        var simplifiedCompanyResource = ReviewCompanyAppointmentFromEntityAssembler.ToResourceFromEntity(appointment.Company);
 
-        return new SimplifiedAppointmentResource(
+        return new ReviewAppointmentResource(
             simplifiedServiceResource.ServiceName,
             simplifiedCompanyResource.Name,
             appointment.ReservationStartTime,

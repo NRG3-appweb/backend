@@ -1,6 +1,6 @@
 ﻿namespace NRG3.Bliss.API.ReviewManagement.Interfaces.Rest.Resources;
 
-//TODO: Check the resource naming (SimplifiedAppointmentResource || ReviewAppointmentResource)(Elvia)
+
 /// <summary>
 /// Simplified Resource for an appointment
 /// </summary>
@@ -16,4 +16,4 @@
 /// <param name="UserId">
 /// The unique identifier of the user
 /// </param>
-public record SimplifiedAppointmentResource(string ServiceName, string CompanyName, string ReservationStartTime, int UserId);
+public record ReviewAppointmentResource(string ServiceName, string CompanyName, string ReservationStartTime, int UserId);

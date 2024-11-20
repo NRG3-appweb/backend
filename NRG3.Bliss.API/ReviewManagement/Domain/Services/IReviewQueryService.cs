@@ -44,5 +44,10 @@ public interface IReviewQueryService
     /// </returns>
     Task<IEnumerable<Review>> Handle(GetAllReviewsByCompanyIdQuery query);
     
-    Task<Appointment?> GetAppointmentByIdAsync(int appointmentId);
+    Task<Review>
+        Handle(GetReviewByAppointmentIdQuery query);
+    
+    Task<Appointment?> GetAppointmentByIdAsync(int appointmentId);  
+    
+    Task<IEnumerable<Review>> GetAllReviewsAsync();
 }

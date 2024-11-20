@@ -27,10 +27,11 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         builder.Entity<Service>().HasKey(s => s.Id);
         builder.Entity<Service>().Property(s => s.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Service>().Property(s => s.ServiceName).IsRequired().HasMaxLength(100);
+        builder.Entity<Service>().Property(s => s.Name).IsRequired().HasMaxLength(100);
         builder.Entity<Service>().Property(s => s.Price).IsRequired();
         builder.Entity<Service>().Property(s => s.Duration).IsRequired();
         builder.Entity<Service>().Property(s => s.Description).HasMaxLength(500);
+        builder.Entity<Service>().Property(s => s.ImageUrl);
         
         builder.Entity<Category>().HasKey(c => c.Id);
         builder.Entity<Category>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();

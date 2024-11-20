@@ -20,7 +20,7 @@ public static class ReviewResourceFromEntityAssembler
     /// </returns>
     public static ReviewResource ToResourceFromEntity(Review review)
     {
-        var simplifiedAppointmentResource = SimplifiedReviewAppointmentFromEntityAssembler.ToResourceFromEntity(review.Appointment);
+        var simplifiedAppointmentResource = ReviewAppointmentFromEntityAssembler.ToResourceFromEntity(review.Appointment);
 
         return new ReviewResource(
             review.Id,

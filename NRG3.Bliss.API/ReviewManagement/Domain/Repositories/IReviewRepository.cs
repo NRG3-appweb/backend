@@ -30,8 +30,10 @@ public interface IReviewRepository : IBaseRepository<Review>
     /// <returns>
     /// The <see cref="Review"/> if found, otherwise null
     /// </returns>
-    Task<IEnumerable<Review>> FindReviewsByAppointmentIdAsync(int appointmentId);
 
+    
+    Task<bool> ReviewExistForAppointmentId(int appointmentId);
+    
     /// <summary>
     /// Find reviews by company id
     /// </summary>
@@ -53,4 +55,9 @@ public interface IReviewRepository : IBaseRepository<Review>
     /// The <see cref="Review"/> if found, otherwise null
     /// </returns>
     Task<Review?> FindReviewByIdAsync(int reviewId);
+    
+    Task<Review?> FindReviewByAppointmentIdAsync(int appointmentId);
+    
+    Task<IEnumerable<Review>> FindAllReviewsAsync();
+    
 }

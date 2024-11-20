@@ -10,6 +10,15 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace NRG3.Bliss.API.ServiceManagement.Interfaces.REST;
 
+/**
+ * Controller for services
+ * <param name="serviceCommandService">
+ * The <see cref="IServiceCommandService"/> service to handle commands
+ * </param>
+ * <param name="serviceQueryService">
+ * The <see cref="IServiceQueryService"/> service to handle queries
+ *  </param>
+ */
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
@@ -21,6 +30,16 @@ public class ServicesController(
     IServiceQueryService serviceQueryService
     ) : ControllerBase
 {
+    
+    /**
+     * Get service by id
+     * <param name="serviceId">
+     * The id of the service to get
+     * </param>
+     * <returns>
+     * The <see cref="ServiceResource"/> resource with the given id
+     * </returns>
+     */
     [HttpGet("{serviceId:int}")]
     [SwaggerOperation (
         Summary = "Get service by id",
@@ -36,6 +55,12 @@ public class ServicesController(
         return Ok(serviceResource);
     }
     
+    /**
+     * Get all services
+     * <returns>
+     * The <see cref="ServiceResource"/> resources for all services
+     * </returns>
+     */
     [HttpGet]
     [SwaggerOperation(
         Summary = "Get all services",
@@ -52,6 +77,15 @@ public class ServicesController(
         return Ok(serviceResources);
     }
     
+    /**
+     * Create a new service
+     * <param name="resource">
+     * The <see cref="CreateServiceResource"/> resource to create the service from
+     * </param>
+     * <returns>
+     * The <see cref="ServiceResource"/> resource created
+     * </returns>
+     */
     [HttpPost]
     [SwaggerOperation(
         Summary = "Create a new service",
@@ -63,11 +97,23 @@ public class ServicesController(
     {
         var createServiceCommand = CreateServiceCommandResourceFromEntityAssembler.ToCommandFromResource(resource);
         var service = await serviceCommandService.Handle(createServiceCommand);
-        if (service is null) return BadRequest();
+        if (service is null) return BadRequest("The service could not be created");
         var serviceResource = ServiceResourceFromEntityAssembler.ToResourceFromEntity(service);
         return CreatedAtAction(nameof(GetServiceById), new { serviceId = service.Id }, serviceResource);
     }
     
+    /**
+     * Update a service
+     * <param name="resource">
+     * The <see cref="UpdateServiceResource"/> resource to update the service from
+     * </param>
+     * <param name="serviceId">
+     * The id of the service to update
+     * </param>
+     * <returns>
+     * The <see cref="ServiceResource"/> resource updated
+     * </returns>
+     */
     [HttpPut("{serviceId:int}")]
     [SwaggerOperation(
         Summary = "Update a service",
@@ -84,6 +130,15 @@ public class ServicesController(
         return Ok(serviceResource);
     }
     
+    /**
+     * Delete a service
+     * <param name="serviceId">
+     * The id of the service to delete
+     * </param>
+     * <returns>
+     * A message indicating the service was deleted
+     * </returns>
+     */
     [HttpDelete("{serviceId:int}")]
     [SwaggerOperation(
         Summary = "Delete a service",

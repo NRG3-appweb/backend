@@ -29,5 +29,15 @@ public interface IAppointmentQueryService
     /// The <see cref="Appointment"/> object with the appointment
     /// </returns>
     Task<Appointment?> Handle(GetAppointmentByIdQuery query);
+    /// <summary>
+    /// Handle get appointment by company id query
+    /// </summary>
+    /// <param name="query">
+    /// The <see cref="GetAppointmentByCompanyId"/> query
+    /// </param>
+    /// <returns>
+    /// The <see cref="Appointment"/> object with the appointment
+    /// </returns>
+    Task<IEnumerable<Appointment>> Handle(GetAppointmentByCompanyId query);
     
 }

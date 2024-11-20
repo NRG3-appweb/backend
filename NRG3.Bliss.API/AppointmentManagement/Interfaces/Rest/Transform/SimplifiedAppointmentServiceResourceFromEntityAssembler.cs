@@ -22,6 +22,6 @@ public static class SimplifiedAppointmentServiceResourceFromEntityAssembler
     /// </returns>
     public static SimplifiedServiceResource ToResourceFromEntity(Service entity)
     {
-        return new SimplifiedServiceResource(entity.Id, entity.ServiceName,entity.Price);
+        return new SimplifiedServiceResource(entity.Id, entity.Name,entity.Price);
     }
 }

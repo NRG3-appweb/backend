@@ -9,6 +9,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace NRG3.Bliss.API.ServiceManagement.Interfaces.REST;
 
+/**
+ * Controller for company services
+ */
 [ApiController]
 [Route("api/v1/companies/{companyId}/services")]
 [Produces(MediaTypeNames.Application.Json)]
@@ -17,6 +20,15 @@ namespace NRG3.Bliss.API.ServiceManagement.Interfaces.REST;
 
 public class CompanyServicesController(IServiceQueryService serviceQueryService) : ControllerBase
 {
+    /**
+     * Get all services by company id
+     * <param name="companyId">
+     * The id of the company to get the services for
+     * </param>
+     * <returns>
+     * The <see cref="ServiceResource"/> resources for the company with the given id
+     * </returns>
+     */
     [HttpGet]
     [SwaggerOperation(
         Summary = "Get all services by company id",

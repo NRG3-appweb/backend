@@ -66,4 +66,15 @@ public interface IAppointmentRepository : IBaseRepository<Appointment>
     /// </returns>
     Task<Appointment?> FindAppointmentByIdAsync(int appointmentId);
     
+    /// <summary>
+    ///  Find appointment by company id
+    /// </summary>
+    /// <param name="companyId">
+    /// The company id to search for 
+    /// </param>
+    /// <returns>
+    /// The <see cref="Appointment"/> if found, otherwise null
+    /// </returns>
+    Task<IEnumerable<Appointment>> FindAppointmentsByCompanyIdAsync(int companyId);
+    
 }

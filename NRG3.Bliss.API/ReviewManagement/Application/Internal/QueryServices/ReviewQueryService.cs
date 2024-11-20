@@ -39,4 +39,15 @@ public class ReviewQueryService(IReviewRepository reviewRepository,
     {
         return await reviewRepository.FindReviewByIdAsync(query.ReviewId);
     }
+    
+    
+    public async Task<Review?> Handle(GetReviewByAppointmentIdQuery query)
+    {
+        return await reviewRepository.FindReviewByAppointmentIdAsync(query.appointmentId);
+    }
+    
+    public async Task<IEnumerable<Review>> GetAllReviewsAsync()
+    {
+        return await reviewRepository.FindAllReviewsAsync();
+    }
 }

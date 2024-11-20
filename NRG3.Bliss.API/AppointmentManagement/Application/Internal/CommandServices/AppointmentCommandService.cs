@@ -78,28 +78,4 @@ public class AppointmentCommandService(
 
 
     }
-    
-    
-    /// <inheritdoc />
-    public async Task<Appointment?> Handle(UpdateAppointmentCommand command)
-    {
-        var appointment = await appointmentRepository.FindByIdAsync(command.AppointmentId);
-        if (appointment == null)
-        {
-            return null; 
-        }
-        
-        //TODO: Create a constructor to update this appointment (Gianluca)
-        appointment.UserId = command.UserId;
-        appointment.CompanyId = command.CompanyId;
-        appointment.ServiceId = command.ServiceId;
-        appointment.Status = command.Status;
-        appointment.ReservationDate = command.ReservationDate;
-        appointment.ReservationStartTime = command.ReservationStartTime;
-        appointment.Requirements = command.Requirements;
-        
-        await unitOfWork.CompleteAsync();
-
-        return appointment;
-    }
 }

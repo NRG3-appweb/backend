@@ -1,4 +1,4 @@
-﻿// ReviewsController.cs
+﻿
 using System.Net.Mime;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -52,8 +52,25 @@ public class ReviewsController(
         var reviewResources = reviews.Select(ReviewResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(reviewResources);
     }
+
+
+    [HttpGet("appointment/{appointmentId:int}")]
+    [SwaggerOperation(
+        Summary = "Get review by appointment id",
+        Description = "Get a review by the id the appointment has",
+        OperationId = "GetReviewByAppointmentIdQuery")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The review was found", typeof(ReviewResource))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "The review was not found.")]
+    public async Task<IActionResult> GetReviewByAppointmentId([FromRoute] int appointmentId)
+    {
+        var getReviewByAppointmentIdQuery = new GetReviewByAppointmentIdQuery(appointmentId);
+        var review = await reviewQueryService.Handle(getReviewByAppointmentIdQuery);
+        if (review is null) return NotFound();
+        var reviewResource = ReviewResourceFromEntityAssembler.ToResourceFromEntity(review);
+        return Ok(reviewResource);
+    }
     
-    //TODO: Refactor this function to match the following endpoint in a different controller (api/v1/companies/{companyId:int}/services/appointments/reviews) ask Angel (Elvia)
+
     [HttpGet("company/{companyId:int}")]
     [SwaggerOperation(
         Summary = "Get reviews by company id",
@@ -120,5 +137,20 @@ public class ReviewsController(
         if (review is null) return NotFound();
         var reviewResource = ReviewResourceFromEntityAssembler.ToResourceFromEntity(review);
         return Ok(reviewResource);
+    }
+    
+    [HttpGet]
+    [SwaggerOperation(
+        Summary = "Get all reviews",
+        Description = "Get all reviews in the system",
+        OperationId = "GetAllReviews")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The reviews were found", typeof(IEnumerable<ReviewResource>))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "No reviews were found.")]
+    public async Task<IActionResult> GetAllReviews()
+    {
+        var reviews = await reviewQueryService.GetAllReviewsAsync();
+        if (!reviews.Any()) return NotFound();
+        var reviewResources = reviews.Select(ReviewResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(reviewResources);
     }
 }

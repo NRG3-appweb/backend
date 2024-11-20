@@ -29,18 +29,4 @@ public interface IAppointmentCommandService
     /// The <see cref="Task"/> object
     /// </returns>
     Task Handle(DeleteAppointmentCommand command);
-    
-    
-    /// <summary>
-    /// Handle update appointment command
-    /// </summary>
-    /// <param name="command">
-    /// The <see cref="UpdateAppointmentCommand"/> command
-    /// </param>
-    /// <returns>
-    /// The <see cref="Appointment"/> object with the updated appointment
-    /// </returns>
-    Task<Appointment?> Handle(UpdateAppointmentCommand command);
-    
-    
 }

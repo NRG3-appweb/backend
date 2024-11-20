@@ -13,6 +13,7 @@ public class ServiceCommandService(
     IUnitOfWork unitOfWork)
     :IServiceCommandService
 {
+    /// <inheritdoc />
     public async Task<Service?> Handle(CreateServiceCommand command)
     {
         if (await serviceRepository.ServiceNameExistsForCompanyAndCategoryAsync(command.CompanyId, command.CategoryId,
@@ -20,7 +21,7 @@ public class ServiceCommandService(
         {
             throw new InvalidOperationException("The service name already exists for the company and category.");
         }
-        var service = new Service(command.CompanyId, command.CategoryId, command.ServiceName, command.Description, command.Price, command.Duration);
+        var service = new Service(command.CompanyId, command.CategoryId, command.ServiceName, command.Description, command.Price, command.Duration, command.ImageUrl);
         await serviceRepository.AddAsync(service);
         await unitOfWork.CompleteAsync();
         var category = await categoryRepository.FindByIdAsync(command.CategoryId);
@@ -34,6 +35,7 @@ public class ServiceCommandService(
         return service;
     }
 
+    /// <inheritdoc />
     public async Task<Service?> Handle(UpdateServiceCommand command)
     {
         var service = await serviceRepository.FindServiceById(command.ServiceId);
@@ -46,6 +48,7 @@ public class ServiceCommandService(
         return service;
     }
 
+    /// <inheritdoc />
     public async Task Handle(DeleteServiceCommand command)
     {
         var service = await serviceRepository.FindServiceById(command.ServiceId);
