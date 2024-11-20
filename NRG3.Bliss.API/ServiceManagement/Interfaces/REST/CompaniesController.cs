@@ -9,6 +9,15 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace NRG3.Bliss.API.ServiceManagement.Interfaces.REST;
 
+/**
+ * Controller for the companies
+ * <param name="companyCommandService">
+ * The <see cref="ICompanyCommandService"/> service to handle company commands
+ * </param>
+ * <param name="companyQueryService">
+ * The <see cref="ICompanyQueryService"/> service to handle company queries
+ * </param>
+ */
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
@@ -20,6 +29,15 @@ public class CompaniesController(
     ICompanyQueryService companyQueryService
     ) : ControllerBase
 {
+    /**
+     * Create a new company
+     * <param name="resource">
+     * The <see cref="CreateCompanyResource"/> resource to create the company from
+     * </param>
+     * <returns>
+     * The <see cref="CompanyResource"/> resource created
+     * </returns>
+     */
     [HttpPost]
     [SwaggerOperation(
         Summary = "Create a new company",
@@ -35,6 +53,15 @@ public class CompaniesController(
         return CreatedAtAction(nameof(GetCompanyById), new { companyId = company.Id }, companyResource);
     }
     
+    /**
+     * Get company by id
+     * <param name="companyId">
+     * The id of the company to get
+     * </param>
+     * <returns>
+     * The <see cref="CompanyResource"/> resource with the given id
+     * </returns>
+     */
     [HttpGet("{companyId:int}")]
     [SwaggerOperation(
         Summary = "Get company by id",
@@ -50,6 +77,12 @@ public class CompaniesController(
         return Ok(companyResource);
     }
     
+    /**
+     * Get all companies
+     * <returns>
+     * The <see cref="CompanyResource"/> resources for all companies
+     * </returns>
+     */
     [HttpGet]
     [SwaggerOperation(
         Summary = "Get all companies",

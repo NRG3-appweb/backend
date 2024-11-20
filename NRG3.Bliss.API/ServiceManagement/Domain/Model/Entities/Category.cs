@@ -3,6 +3,13 @@ using NRG3.Bliss.API.ServiceManagement.Domain.Model.Commands;
 
 namespace NRG3.Bliss.API.ServiceManagement.Domain.Model.Entities;
 
+/**
+ * Category entity
+ * <summary>
+ * This class represents the category entity.
+ * It contains the properties and methods to manage the category information.
+ * </summary>
+ */
 public partial class Category
 {
     public int Id { get; set; }

@@ -13,6 +13,7 @@ public class ServiceCommandService(
     IUnitOfWork unitOfWork)
     :IServiceCommandService
 {
+    /// <inheritdoc />
     public async Task<Service?> Handle(CreateServiceCommand command)
     {
         if (await serviceRepository.ServiceNameExistsForCompanyAndCategoryAsync(command.CompanyId, command.CategoryId,
@@ -34,6 +35,7 @@ public class ServiceCommandService(
         return service;
     }
 
+    /// <inheritdoc />
     public async Task<Service?> Handle(UpdateServiceCommand command)
     {
         var service = await serviceRepository.FindServiceById(command.ServiceId);
@@ -46,6 +48,7 @@ public class ServiceCommandService(
         return service;
     }
 
+    /// <inheritdoc />
     public async Task Handle(DeleteServiceCommand command)
     {
         var service = await serviceRepository.FindServiceById(command.ServiceId);

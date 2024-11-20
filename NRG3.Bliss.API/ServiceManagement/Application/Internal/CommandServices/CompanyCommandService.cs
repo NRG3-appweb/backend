@@ -9,6 +9,7 @@ namespace NRG3.Bliss.API.ServiceManagement.Application.Internal.CommandServices;
 public class CompanyCommandService(ICompanyRepository companyRepository, IUnitOfWork unitOfWork)
 :ICompanyCommandService
 {
+    /// <inheritdoc />
     public async Task<Company?> Handle(CreateCompanyCommand command)
     {
         var existingCompany = await companyRepository.FindCompaniesByCompanyName(command.Name);

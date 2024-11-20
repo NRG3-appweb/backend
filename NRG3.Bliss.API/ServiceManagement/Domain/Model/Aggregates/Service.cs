@@ -4,6 +4,13 @@ using NRG3.Bliss.API.ServiceManagement.Domain.Model.Entities;
 
 namespace NRG3.Bliss.API.ServiceManagement.Domain.Model.Aggregates;
 
+/**
+ * Service aggregate root entity
+ * <summary>
+ *  This class represents the service aggregate root.
+ *  It contains the properties and methods to manage the service information.
+ * </summary>
+ */
 public partial class Service
 {
     public int Id { get; }
