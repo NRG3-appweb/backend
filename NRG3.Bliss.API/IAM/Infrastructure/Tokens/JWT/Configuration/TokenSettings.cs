@@ -2,5 +2,5 @@
 
 public class TokenSettings
 {
-    public string Secret { get; }
+    public string Secret { get; set; }
 }
