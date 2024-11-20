@@ -25,8 +25,34 @@ public class ServiceCommandService(
         await unitOfWork.CompleteAsync();
         var category = await categoryRepository.FindByIdAsync(command.CategoryId);
         var company = await companyRepository.FindByIdAsync(command.CompanyId);
+        
+        if (category == null) throw new InvalidOperationException("The category selected doesnt exists");
+        if (company == null) throw new InvalidOperationException("The company selected doesnt exists");
+            
         service.Category = category;
         service.Company = company;
         return service;
+    }
+
+    public async Task<Service?> Handle(UpdateServiceCommand command)
+    {
+        var service = await serviceRepository.FindServiceById(command.ServiceId);
+        if (service == null) throw new InvalidOperationException("Error on fetching service.");
+        var category = await categoryRepository.FindByIdAsync(command.CategoryId);
+        if (category == null) throw new InvalidOperationException("The category selected doesnt exists");
+        service.Category = category;
+        service.UpdateInformation(command.ServiceName, command.Description, command.Price, command.Duration);
+        await unitOfWork.CompleteAsync();
+        return service;
+    }
+
+    public async Task Handle(DeleteServiceCommand command)
+    {
+        var service = await serviceRepository.FindServiceById(command.ServiceId);
+        if(service != null)
+        {
+            serviceRepository.Remove(service);
+            await unitOfWork.CompleteAsync();
+        }
     }
 }
