@@ -44,7 +44,7 @@ public class UserCommandService(
             throw new Exception($"User {command.Email} not found");
         }
 
-        if (!hashingService.VerifyPassword(command.Password, user.Password))
+        if (!hashingService.VerifyPassword(command.Password, user.PasswordHash))
         {
             throw new Exception("Invalid password");
         }

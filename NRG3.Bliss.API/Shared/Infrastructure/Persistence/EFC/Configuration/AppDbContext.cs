@@ -57,7 +57,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<User>().Property(u => u.FirstName).IsRequired().HasMaxLength(50);
         builder.Entity<User>().Property(u => u.LastName).IsRequired().HasMaxLength(50);
-        builder.Entity<User>().Property(u => u.Password).IsRequired().HasMaxLength(50);
+        builder.Entity<User>().Property(u => u.PasswordHash).IsRequired().HasMaxLength(50);
         builder.Entity<User>().Property(u => u.Email).IsRequired();
         builder.Entity<User>().Property(u => u.Phone).IsRequired().HasMaxLength(9);
         builder.Entity<User>().Property(u => u.Dni).IsRequired().HasMaxLength(8);

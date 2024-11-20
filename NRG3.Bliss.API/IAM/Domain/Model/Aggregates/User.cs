@@ -17,7 +17,7 @@ public partial class User
     public int Id { get; private set; }
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
-    public string Password { get; private set; }
+    public string PasswordHash { get; private set; }
     public string Email { get; private set; }
     public string Phone { get; private set; }
     public string Dni { get; private set; }
@@ -32,7 +32,7 @@ public partial class User
     
     public User( string firstName, 
         string lastName, 
-        string password, 
+        string passwordHash, 
         string email, 
         string phone, 
         string dni, 
@@ -42,7 +42,7 @@ public partial class User
     {
         FirstName = firstName;
         LastName = lastName;
-        Password = password;
+        PasswordHash = passwordHash;
         Email = email;
         Phone = phone;
         Dni = dni;
@@ -51,11 +51,11 @@ public partial class User
         BirthDate = birthDate;
     }
     
-    public User(SignUpCommand command, string hashedPassword)
+    public User(SignUpCommand command, string hashedPasswordHash)
     {
         FirstName = command.FirstName;
         LastName = command.LastName;
-        Password = hashedPassword;
+        PasswordHash = hashedPasswordHash;
         Email = command.Email;
         Phone = command.Phone;
         Dni = command.Dni;

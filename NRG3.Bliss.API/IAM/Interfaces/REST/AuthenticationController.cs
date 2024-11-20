@@ -20,7 +20,7 @@ namespace NRG3.Bliss.API.IAM.Interfaces.REST;
 /// </param>
 [Microsoft.AspNetCore.Authorization.Authorize]
 [ApiController]
-[Route("/api/v1/[controller")]
+[Route("/api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 [SwaggerTag("Available Authentication endpoints")]
 public class AuthenticationController(IUserCommandService userCommandService) : ControllerBase

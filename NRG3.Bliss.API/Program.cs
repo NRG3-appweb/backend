@@ -1,9 +1,18 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using NRG3.Bliss.API.AppointmentManagement.Application.Internal.CommandServices;
 using NRG3.Bliss.API.AppointmentManagement.Application.Internal.QueryServices;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Repositories;
 using NRG3.Bliss.API.AppointmentManagement.Domain.Services;
 using NRG3.Bliss.API.AppointmentManagement.Infrastructure.Persistence.EFC.Repositories;
+using NRG3.Bliss.API.IAM.Application.Internal.CommandServices;
+using NRG3.Bliss.API.IAM.Application.Internal.OutboundServices;
+using NRG3.Bliss.API.IAM.Application.Internal.QueryServices;
+using NRG3.Bliss.API.IAM.Domain.Services;
+using NRG3.Bliss.API.IAM.Infrastructure.Hashing.BCrypt.Services;
+using NRG3.Bliss.API.IAM.Infrastructure.Pipeline.Middleware.Extensions;
+using NRG3.Bliss.API.IAM.Infrastructure.Tokens.Configuration;
+using NRG3.Bliss.API.IAM.Infrastructure.Tokens.Services;
 using NRG3.Bliss.API.ReviewManagement.Application.Internal.CommandServices;
 using NRG3.Bliss.API.ReviewManagement.Application.Internal.QueryServices;
 using NRG3.Bliss.API.ReviewManagement.Domain.Repositories;
@@ -19,29 +28,21 @@ using NRG3.Bliss.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using NRG3.Bliss.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using NRG3.Bliss.API.Shared.Infrastructure.Persistence.EFC.Repositories;
 
+
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-// Apply Route Naming Convention
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAllOrigins",
-        builder =>
-        {
-            builder.WithOrigins("*")
-                .WithMethods("POST", "GET", "PUT", "DELETE")
-                .AllowAnyHeader();
-        });
-});
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers(options => options.Conventions.Add(new KebabCaseRouteNamingConvention()));
+
+// Add CORS Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllPolicy",
+        policy => 
+            policy.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+});
 
 // Add Database Connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -60,10 +61,63 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseMySQL(connectionString);
 });
 
-// OpenAPI/Swagger Configuration
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options => options.EnableAnnotations());
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1",
+        new OpenApiInfo
+        {
+            Title = "Bliss API",
+            Version = "v1",
+            Description = "Bliss API Documentation",
+            TermsOfService = new Uri("https://nrg3-appweb.github.io/Landing-Page/"),
+            Contact = new OpenApiContact
+            {
+                Name   = "NRG3",
+                Email = "contact@nrg3.com"
+            },
+            License = new OpenApiLicense
+            {
+                Name = "Apache 2.0",
+                Url  = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
+            }
+        });
+    options.AddSecurityDefinition(
+        "Bearer",
+        new OpenApiSecurityScheme
+        {
+            In = ParameterLocation.Header,
+            Description = "Please enter token",
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            BearerFormat = "JWT",
+            Scheme = "bearer"
+        });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+    options.EnableAnnotations();
+});
+
+
+
+
+
+
+
 
 // Dependency Injection Configuration
 
@@ -83,7 +137,14 @@ builder.Services.AddScoped<ICompanyQueryService, CompanyQueryService>();
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IAppointmentCommandService, AppointmentCommandService>();
 builder.Services.AddScoped<IAppointmentQueryService, AppointmentQueryService>();
+
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IHashingService, HashingService>();
 
 // Review Management Bounded Context Dependency Injection Configuration
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
@@ -104,18 +165,17 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseCors("AllowAllPolicy");
+
+app.UseRequestAuthorization();
+
 app.UseHttpsRedirection();
-
-app.UseRouting();
-
-// Use CORS
-app.UseCors("AllowAllOrigins");
-
-app.UseAuthorization();
 
 app.MapControllers();
 
